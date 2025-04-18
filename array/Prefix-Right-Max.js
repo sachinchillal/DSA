@@ -31,5 +31,7 @@ function main() {
   console.log(getPrefixRightMax(array));
   array = [1, 5, 2, 6, 3, 7, 4, 8];
   console.log(getPrefixRightMax(array));
+  array = [8, 4, 6, 7, 6, 1, 2, 3];
+  console.log(getPrefixRightMax(array));
 }
 main();
