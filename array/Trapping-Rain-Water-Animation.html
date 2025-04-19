@@ -25,7 +25,17 @@
   <div class="container">
 
     <h1>Trapping Rain Water Animation</h1>
-    <pre id="overview"></pre>
+    <div class="d-flex gap-3 flex-wrap align-items-center">
+      <pre id="overview"></pre>
+      <div class="d-flex gap-3 flex-wrap align-items-center">
+        <div class="form-floating">
+          <textarea class="form-control" placeholder="Values seperated by special chars" id="InputArray" rows="30"
+            cols="50"></textarea>
+          <label for="InputArray">Input Array</label>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnLoadArray">Load Array</button>
+      </div>
+    </div>
 
     <div class="row mt-4 gap-5">
       <div class="col">
@@ -55,6 +65,25 @@
         </div>
       </div>
 
+      <table class="table table-striped" id="stackTable">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Index</th>
+            <th scope="col">Left</th>
+            <th scope="col">Right</th>
+            <th scope="col">Left Max</th>
+            <th scope="col">Right Max</th>
+            <th scope="col">i<sup>th</sup> Building</th>
+            <th scope="col">i<sup>th</sup> Building Water</th>
+            <th scope="col">Water Trapped</th>
+          </tr>
+        </thead>
+        <tbody id="stackTableBody">
+          <!-- Stack will be generated here -->
+        </tbody>
+      </table>
+
       <div class="my-5"></div>
 
     </div>
@@ -66,15 +95,19 @@
       let currentIndex = 0;
       const STACK = [];
       const A = [2, 1, 3, 2, 1, 2, 4, 3, 2, 1, 3, 1];
-      overview.innerText = `A = [${A.join(', ')}]\n`
-        + `N = ${A.length}\n`
-        + `Water Trapped = ${TrappingRainWater(A)}`;
+      init();
 
-      generateBars(A);
+      function init() {
+        overview.innerText = `A = [${A.join(', ')}]\n`
+          + `N = ${A.length}\n`
+          + `Water Trapped = ${TrappingRainWater(A)}`;
 
-      setTimeout(() => {
-        TrappingRainWaterAnimator(A);
-      }, timeout = 1000);
+        generateBars(A);
+
+        setTimeout(() => {
+          TrappingRainWaterAnimator(A);
+        }, timeout = 1000);
+      }
 
       function generateBars(A) {
         arrayVisualization.innerHTML = '';
@@ -93,6 +126,17 @@
       }
 
       // Buttons
+      btnLoadArray.addEventListener('click', () => {
+        const input = InputArray.value.trim().split(/[\s,]+/).map(Number);
+        if (input.length === 0) {
+          alert('Please enter a valid array.');
+          return;
+        }
+        STACK.length = 0;
+        A.length = 0;
+        A.push(...input);
+        init();
+      });
       btnAnimate.addEventListener('click', () => {
         // Reset the animation
         stopAnimation();
@@ -179,19 +223,47 @@
         let right = A.length - 1;
         let leftMax = 0;
         let rightMax = 0;
+        let iThBuilding = 0;
+        let iThBuildingWater = 0;
         while (left < right) {
-          STACK.push({ left, right, leftMax, rightMax, water });
           leftMax = Math.max(leftMax, A[left]);
           rightMax = Math.max(rightMax, A[right]);
+
           if (leftMax < rightMax) {
-            water += leftMax - A[left];
+            iThBuildingWater = leftMax - A[left];
+            water += iThBuildingWater;
+            iThBuilding = left;
+            STACK.push({ left, right, leftMax, rightMax, iThBuilding, iThBuildingWater, water });
             left++;
           } else {
-            water += rightMax - A[right];
+            iThBuildingWater = rightMax - A[right];
+            water += iThBuildingWater;
+            iThBuilding = right;
+            STACK.push({ left, right, leftMax, rightMax, iThBuilding, iThBuildingWater, water });
             right--;
           }
         }
+        buildTable();
         return water;
+      }
+      function buildTable() {
+        stackTableBody.innerHTML = '';
+        STACK.forEach((item, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <th scope="row">${index + 1}</th>
+            <td>${index}</td>
+            <td>${item.left}</td>
+            <td>${item.right}</td>
+            <td>${item.leftMax}</td>
+            <td>${item.rightMax}</td>
+            <td>${item.iThBuilding}</td>
+            <td>${item.iThBuildingWater}</td>
+            <td>${item.water}</td>
+          `;
+          stackTableBody.appendChild(row);
+        });
+
       }
     </script>
 
