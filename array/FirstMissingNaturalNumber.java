@@ -1,15 +1,5 @@
 // Note: Algorithm should run in O(n) time and use constant space.
 
-class TestCase {
-  int[] A;
-  int R;
-
-  TestCase(int[] A, int R) {
-    this.A = A;
-    this.R = R;
-  }
-}
-
 class CustomUtil {
   protected static void printArray(int[] A) {
     System.out.print("A: ");
@@ -24,21 +14,21 @@ class CustomUtil {
 public class FirstMissingNaturalNumber {
   public static void main(String[] args) {
     System.err.println();
-    TestCase[] TestCases = {
-        new TestCase(new int[] { 1 }, 2),
-        new TestCase(new int[] { 2 }, 1),
-        new TestCase(new int[] { 3 }, 1),
-        new TestCase(new int[] { -5 }, 1),
-        new TestCase(new int[] { 1, 2 }, 3),
-        new TestCase(new int[] { 2, 3 }, 1),
-        new TestCase(new int[] { 1, 3 }, 2),
-        new TestCase(new int[] { 2, 3, 1, 2 }, 4),
-        new TestCase(new int[] { 2, 3, 1, 5, 6 }, 4),
-        new TestCase(new int[] { 1, 5, 6, 7, 3, 2 }, 4),
-        new TestCase(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
+    TestCaseArray[] TestCases = {
+        new TestCaseArray(new int[] { 1 }, 2),
+        new TestCaseArray(new int[] { 2 }, 1),
+        new TestCaseArray(new int[] { 3 }, 1),
+        new TestCaseArray(new int[] { -5 }, 1),
+        new TestCaseArray(new int[] { 1, 2 }, 3),
+        new TestCaseArray(new int[] { 2, 3 }, 1),
+        new TestCaseArray(new int[] { 1, 3 }, 2),
+        new TestCaseArray(new int[] { 2, 3, 1, 2 }, 4),
+        new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 4),
+        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 4),
+        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
     };
     int count = 1;
-    for (TestCase testCase : TestCases) {
+    for (TestCaseArray testCase : TestCases) {
       int[] A = testCase.A;
       int expected = testCase.R;
       int result = firstMissingNaturalNumber(A);

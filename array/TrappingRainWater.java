@@ -1,33 +1,24 @@
-class TestCase {
-  int[] A;
-  int R;
-
-  TestCase(int[] A, int R) {
-    this.A = A;
-    this.R = R;
-  }
-}
 
 public class TrappingRainWater {
   public static void main(String[] args) {
     System.err.println();
-    TestCase[] TestCases = {
-        new TestCase(new int[] { 1 }, 0),
-        new TestCase(new int[] { 2 }, 0),
-        new TestCase(new int[] { 3 }, 0),
-        new TestCase(new int[] { -5 }, 0),
-        new TestCase(new int[] { 1, 2 }, 0),
-        new TestCase(new int[] { 2, 3 }, 0),
-        new TestCase(new int[] { 1, 3 }, 0),
-        new TestCase(new int[] { 2, 3, 1, 2 }, 1),
-        new TestCase(new int[] { 2, 3, 1, 5, 6 }, 2),
-        new TestCase(new int[] { 1, 5, 6, 7, 3, 2 }, 0),
-        new TestCase(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
-        new TestCase(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, 6),
-        new TestCase(new int[] { 1, 1, 3, 2, 1, 2, 5, 3, 2, 1, 4, 2 }, 10),
+    TestCaseArray[] TestCases = {
+        new TestCaseArray(new int[] { 1 }, 0),
+        new TestCaseArray(new int[] { 2 }, 0),
+        new TestCaseArray(new int[] { 3 }, 0),
+        new TestCaseArray(new int[] { -5 }, 0),
+        new TestCaseArray(new int[] { 1, 2 }, 0),
+        new TestCaseArray(new int[] { 2, 3 }, 0),
+        new TestCaseArray(new int[] { 1, 3 }, 0),
+        new TestCaseArray(new int[] { 2, 3, 1, 2 }, 1),
+        new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 2),
+        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 0),
+        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
+        new TestCaseArray(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, 6),
+        new TestCaseArray(new int[] { 1, 1, 3, 2, 1, 2, 5, 3, 2, 1, 4, 2 }, 10),
     };
     int count = 1;
-    for (TestCase testCase : TestCases) {
+    for (TestCaseArray testCase : TestCases) {
       int[] A = testCase.A;
       int expected = testCase.R;
       int result = calculateWater(A);
