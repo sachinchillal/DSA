@@ -1,7 +1,7 @@
 
 public class TrappingRainWater {
   public static void main(String[] args) {
-    System.err.println();
+    System.out.println();
     TestCaseArray[] TestCases = {
         new TestCaseArray(new int[] { 1 }, 0),
         new TestCaseArray(new int[] { 2 }, 0),

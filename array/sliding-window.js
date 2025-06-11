@@ -1,5 +1,8 @@
 function SlidingWindow(A, W) {
   const N = A.length;
+  if (W < 0) {
+    W = N;
+  }
   const pSum = [];
   pSum[0] = A[0];
   for (let i = 1; i < N; i++) {
@@ -22,7 +25,7 @@ function main() {
     },
     {
       A: [2, 1, 6, 4],
-      W: 2,
+      W: -3,
       R: [3, 7, 10],
     },
     {
