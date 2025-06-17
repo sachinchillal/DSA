@@ -40,6 +40,8 @@ public class CustomComparator {
       public int compare(Integer a, Integer b) {
         int x = factorsCountOfNumber(a);
         int y = factorsCountOfNumber(b);
+        // System.out.println(x + " " + y + "=" + a + " " + b);
+        // System.out.println(Arrays.toString(R));
         return x - y;
       }
     });

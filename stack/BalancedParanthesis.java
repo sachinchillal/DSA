@@ -1,6 +1,5 @@
 package stack;
 
-import java.util.Arrays;
 import java.util.Stack;
 import helper.TestCaseArray;
 
@@ -52,6 +51,5 @@ public class BalancedParanthesis {
     }
 
     return stack.isEmpty();
-    // return R;
   }
 }

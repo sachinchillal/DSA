@@ -4,7 +4,7 @@ import java.util.Stack;
 
 import helper.TestCaseArray;
 
-public class PostExpression {
+public class PostfixExpression {
   public static void main(String[] args) {
     System.out.println();
     TestCaseArray[] TestCases = {
@@ -12,6 +12,10 @@ public class PostExpression {
         new TestCaseArray(new String[] { "1", "2", "-" }, -1), // * 1-2
         new TestCaseArray(new String[] { "1", "2", "*" }, 2),
         new TestCaseArray(new String[] { "1", "2", "/" }, 0), // * 1/2
+        new TestCaseArray(new String[] { "1", "2", "5", "*", "+" }, 11), // 1 + 2 * 5
+        new TestCaseArray(new String[] { "2", "5", "*", "3", "-" }, 7), // 2 * 5 - 3
+        new TestCaseArray(new String[] { "2", "5", "*", "3", "-", "4", "+" }, 11), // 2 * 5 - 3 + 4
+        new TestCaseArray(new String[] { "2", "5", "*", "3", "-", "4", "6", "+", "*" }, 70), // (2 * 5 - 3) * (4 + 6)
     };
 
     int count = 1;
@@ -29,11 +33,10 @@ public class PostExpression {
   }
 
   public static int calculatePostExpression(String[] A) {
-    int R = -1;
     if (A.length == 0) {
       return 0;
     }
-    Stack<Integer> stack = new Stack();
+    Stack<Integer> stack = new Stack<>();
     for (String t : A) {
       int a = 0;
       int b = 0;
@@ -69,6 +72,6 @@ public class PostExpression {
       return stack.pop();
     }
 
-    return R;
+    return 0;
   }
 }

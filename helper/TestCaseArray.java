@@ -4,6 +4,8 @@ public class TestCaseArray {
   public int[] A;
   public String[] As;
   public int[] B;
+  public String S;
+
   public int[] R_Array; // Result
   public int R; // Result
   public String Rs; // String Result
@@ -51,5 +53,10 @@ public class TestCaseArray {
   public TestCaseArray(String s, Boolean R) {
     Rs = s;
     Rb = R;
+  }
+
+  public TestCaseArray(String s, String R) {
+    S = s;
+    Rs = R;
   }
 }
