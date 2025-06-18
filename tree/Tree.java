@@ -4,6 +4,9 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 public class Tree {
+  /*
+   * Level Order Array to Normal Tree Construction
+   */
   public static TreeNode arrayToTree(int[] A) {
     if (A.length == 0) {
       return null;
@@ -27,6 +30,27 @@ public class Tree {
     }
 
     return root;
+  }
+
+  /*
+   * Binary Search Trees (BST) Construction by Sorting Array
+   */
+  public static TreeNode arrayToBinarySearchTree(int[] A) {
+    if (A.length == 0) {
+      return null;
+    }
+    return constructorBST(A, 0, A.length - 1);
+  }
+
+  private static TreeNode constructorBST(int[] A, int low, int high) {
+    if (low > high) {
+      return null;
+    }
+    int mid = low + (high - low) / 2;
+    TreeNode n = new TreeNode(A[mid]);
+    n.left = constructorBST(A, low, mid - 1);
+    n.right = constructorBST(A, mid + 1, high);
+    return n;
   }
 
   public static int[] treeToArray(TreeNode root) {

@@ -63,10 +63,9 @@ public class PairModArray {
     // O(N) + O(B) / O(B)
   }
 
-  private static int pairMod2(int A[], int m) {
+  public static int pairMod2(int A[], int m) {
     // this solution is not working
     int c = 0;
-    int n = A.length;
     int[] f = new int[m];
     for (int i = 0; i < f.length; i++) {
       int v = A[i] % m;

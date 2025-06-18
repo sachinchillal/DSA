@@ -3,7 +3,10 @@ package helper;
 public class TestCaseArray {
   public int[] A;
   public String[] As;
+
   public int[] B;
+  public int Bi;
+
   public String S;
 
   public int[] R_Array; // Result
@@ -33,9 +36,20 @@ public class TestCaseArray {
     this.R_Array = R;
   }
 
-  public TestCaseArray(int[] A, int[] R) {
+  public TestCaseArray(int[] A, int Bi, Boolean Rb) {
     this.A = A;
-    this.R_Array = R;
+    this.Bi = Bi;
+    this.Rb = Rb;
+  }
+
+  public TestCaseArray(int[] A, Boolean Rb) {
+    this.A = A;
+    this.Rb = Rb;
+  }
+
+  public TestCaseArray(int[] A, int[] R_Array) {
+    this.A = A;
+    this.R_Array = R_Array;
   }
 
   public Object[] params; // n no. of function params
