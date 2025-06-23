@@ -3,9 +3,13 @@ package helper;
 public class TestCaseArray {
   public int[] A;
   public String[] As;
+  public int N;
 
   public int[] B;
   public int Bi;
+
+  public int[] C;
+  public int Ci;
 
   public String S;
 
@@ -16,6 +20,11 @@ public class TestCaseArray {
 
   public TestCaseArray(int[] A, int R) {
     this.A = A;
+    this.R = R;
+  }
+
+  public TestCaseArray(int N, int R) {
+    this.N = N;
     this.R = R;
   }
 
@@ -40,6 +49,19 @@ public class TestCaseArray {
     this.A = A;
     this.Bi = Bi;
     this.Rb = Rb;
+  }
+
+  public TestCaseArray(int[] A, int Bi, int R) {
+    this.A = A;
+    this.Bi = Bi;
+    this.R = R;
+  }
+
+  public TestCaseArray(int[] A, int Bi, int Ci, int R) {
+    this.A = A;
+    this.Bi = Bi;
+    this.Ci = Ci;
+    this.R = R;
   }
 
   public TestCaseArray(int[] A, Boolean Rb) {

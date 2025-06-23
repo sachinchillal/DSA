@@ -37,6 +37,12 @@ public class NearestGreaterElementOnRight {
     }
   }
 
+  /**
+   * Next Greater Element I
+   * Next Greater Element II
+   * Daily Temperatures (find next greater temperature)
+   * Online Stock Span (find previous greater element)
+   */
   public static int[] findRightGreaterElement(int[] A) {
     int n = A.length;
     int[] R = new int[n];

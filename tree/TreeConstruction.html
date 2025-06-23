@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Construction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /*
+    * The main container for the tree.
+    * We use flexbox to center the tree on the page.
+    */
+    .tree-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* min-height: 100vh; */
+      overflow-x: auto;
+      /* Allow horizontal scrolling for large trees */
+      padding: 2rem;
+    }
+
+    /*
+        * Core styles for the tree visualization.
+        * This uses a classic approach of styling a nested <ul>/<li> structure.
+        * The pseudo-elements ::before and ::after are used to draw connector lines.
+        */
+    .tree ul {
+      position: relative;
+      padding-top: 1.5rem;
+      /* Space for the connector line from the parent */
+      display: flex;
+      justify-content: center;
+    }
+
+    /* The ::before pseudo-element creates the vertical line from parent to children */
+    .tree ul::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid #cbd5e1;
+      /* gray-300 */
+      width: 0;
+      height: 1.5rem;
+    }
+
+    .tree li {
+      list-style-type: none;
+      position: relative;
+      padding: 1.5rem 0.5rem 0 0.5rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* * The ::before pseudo-element draws the top half of the horizontal line.
+        * The ::after pseudo-element draws the bottom vertical line connecting to the node.
+        */
+    .tree li::before,
+    .tree li::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 50%;
+      border-top: 2px solid #cbd5e1;
+      /* gray-300 */
+      width: 50%;
+      height: 1.5rem;
+    }
+
+    .tree li::after {
+      right: auto;
+      left: 50%;
+      border-left: 2px solid #cbd5e1;
+      /* gray-300 */
+    }
+
+    /* Remove the left-going line for the first child */
+    .tree li:first-child::before {
+      border: 0 none;
+    }
+
+    /* Remove the right-going line for the last child */
+    .tree li:last-child::after {
+      border: 0 none;
+    }
+
+    /* Add a horizontal line across all children, except for the last one */
+    .tree li:last-child::before {
+      border-right: 2px solid #cbd5e1;
+      /* gray-300 */
+      border-radius: 0 5px 0 0;
+    }
+
+    /* For a node with only one child, the line should be straight down */
+    .tree li:only-child::before,
+    .tree li:only-child::after {
+      display: none;
+    }
+
+    .tree li:only-child {
+      padding-top: 0;
+    }
+
+    .tree li:only-child>.node::before {
+      content: '';
+      position: absolute;
+      top: -1.5rem;
+      /* Distance from node */
+      left: 50%;
+      border-left: 2px solid #cbd5e1;
+      width: 0;
+      height: 1.5rem;
+    }
+
+
+    /* The actual node element */
+    .node {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border: 2px solid #94a3b8;
+      /* gray-400 */
+      background-color: #0a0;
+      color: #1e293b;
+      color: #fff;
+      /* gray-800 */
+      font-weight: 500;
+      border-radius: 9999px;
+      /* Make it a circle */
+      z-index: 10;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .node:hover {
+      transform: scale(1.1);
+      background-color: rgb(240, 90, 0);
+      /* gray-200 */
+      border-color: #64748b;
+      /* gray-500 */
+    }
+  </style>
+</head>
+
+
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <div class="container mx-auto p-4">
+    <div id="treeInfo"></div>
+    <div class="tree-container">
+      <div id="tree-root" class="tree">
+        <!-- The tree will be generated here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Recursively builds the HTML for the tree.
+     * @param {object} node - The current node object from the tree data.
+     * @returns {HTMLLIElement|null} - The list item element for the node, or null.
+     */
+    function buildTree(node) {
+      // Base case: if the node is null or undefined, return nothing.
+      if (!node) {
+        return null;
+      }
+
+      // Create the list item that will contain the node and its children
+      const li = document.createElement('li');
+
+      // Create the element for the node's value
+      const nodeDiv = document.createElement('div');
+      nodeDiv.className = node.val == null ? 'node bg-gray-900' : 'node';
+      nodeDiv.textContent = node.val; // Use 'v' for the value
+      li.appendChild(nodeDiv);
+
+      // Check if there are any children (left or right)
+      const hasChildren = node.left || node.right;
+
+      if (hasChildren) {
+        // Create the 'ul' that will hold the children
+        const childrenUl = document.createElement('ul');
+
+        // Recursively build the left and right children
+        const leftChild = buildTree(node.left);
+        const rightChild = buildTree(node.right);
+
+        // Append children if they exist
+        if (leftChild) {
+          childrenUl.appendChild(leftChild);
+        }
+        if (rightChild) {
+          childrenUl.appendChild(rightChild);
+        }
+
+        // Append the children list to the current node's list item
+        li.appendChild(childrenUl);
+      }
+
+      return li;
+    }
+
+    /**
+     * Renders the entire tree into a container element.
+     * @param {object} data - The root of the tree data.
+     * @param {string} containerId - The ID of the element to render the tree into.
+     */
+    function renderTree(data, containerId, title, list) {
+      updateTreeInfo(title, list);
+      const container = document.getElementById(containerId);
+      if (!container) {
+        console.error(`Container with id "${containerId}" not found.`);
+        return;
+      }
+
+      // Clear any previous content
+      container.innerHTML = '';
+
+      // Start the recursive building process from the root node
+      const treeRootUl = document.createElement('ul');
+      const treeRootLi = buildTree(data);
+
+      if (treeRootLi) {
+        treeRootUl.appendChild(treeRootLi);
+        container.appendChild(treeRootUl);
+      }
+    }
+
+    // --- INITIALIZATION ---
+    // Render the tree when the page loads.
+    // You can switch between 'treeData' and 'simpleTreeData' to see the difference.
+    const LevelOrderList = [1, 2, 3, 4, 5, 6, 7, null, 8, null, null, null, null, null, null, null, null, 9, 10];
+    const InOrderList = [1, 2, 3, 4, 5, 6, 7];
+    const PostOrderList = [1, 2, 3, 4, 5, 6, 7];
+    const PreOrderList = [1, 2, 3, 4, 5, 6, 7];
+
+    window.onload = () => {
+      const treeData = buildTreeFromLevelOrder(LevelOrderList);
+      console.log(treeData);
+      renderTree(treeData, 'tree-root', 'Level-Order Tree', LevelOrderList);
+      const inOrderTreeData = buildTreeFromInOrder(InOrderList);
+      console.log(inOrderTreeData);
+      // renderTree(inOrderTreeData, 'tree-root', 'In-Order Tree', InOrderList);
+      const postOrderTreeData = buildTreeFromPostOrder(PostOrderList);
+      console.log(postOrderTreeData);
+      // renderTree(postOrderTreeData, 'tree-root', 'Post-Order Tree', PostOrderList);
+      const preOrderTreeData = buildTreeFromPreOrder(PreOrderList);
+      console.log(preOrderTreeData);
+      // renderTree(preOrderTreeData, 'tree-root', 'Pre-Order Tree', PreOrderList);
+      const IOL = [2, 1, 7, 5, 6, 3];
+      const postAndInOrderTreeData = buildTreeFromPostOrderAndInOrder(PostOrderList, IOL);
+      console.log(postAndInOrderTreeData);
+      // renderTree(postAndInOrderTreeData, 'tree-root', 'Post & In-Order Tree', [...PostOrderList, ...IOL]);
+    };
+
+    function updateTreeInfo(title, list) {
+      const treeInfo = document.getElementById('treeInfo');
+      treeInfo.innerHTML = title + ': [<b class="text-blue-500">' + list.map(item => item === null ? 'null' : item).join(', ') + '</b>]';
+    }
+
+    function buildTreeFromPostOrderAndInOrder(postOrder = [], inOrder = []) {
+      if (!postOrder || !inOrder || postOrder.length === 0 || inOrder.length === 0) return null;
+
+      const rootValue = postOrder[postOrder.length - 1];
+      const root = { val: rootValue, left: null, right: null };
+
+      const rootIndexInOrder = inOrder.indexOf(rootValue);
+      const leftInOrder = inOrder.slice(0, rootIndexInOrder);
+      const rightInOrder = inOrder.slice(rootIndexInOrder + 1);
+
+      const leftPostOrder = postOrder.slice(0, leftInOrder.length);
+      const rightPostOrder = postOrder.slice(leftInOrder.length, postOrder.length - 1);
+
+      root.left = buildTreeFromPostOrderAndInOrder(leftPostOrder, leftInOrder);
+      root.right = buildTreeFromPostOrderAndInOrder(rightPostOrder, rightInOrder);
+
+      return root;
+    }
+    function buildTreeFromPostOrder(A = []) {
+      if (!A || A.length === 0) return null;
+      const root = { val: A[A.length - 1], left: null, right: null };
+      let i = A.length - 2;
+      const stack = [root];
+      while (i >= 0) {
+        const current = stack[stack.length - 1];
+        if (!current.right) {
+          current.right = { val: A[i], left: null, right: null };
+          stack.push(current.right);
+        } else if (!current.left) {
+          current.left = { val: A[i], left: null, right: null };
+          stack.pop();
+          stack.push(current.left);
+        }
+        i--;
+      }
+      return root;
+    }
+    function buildTreeFromPreOrder(A = []) {
+      if (!A || A.length === 0) return null;
+      const root = { val: A[0], left: null, right: null };
+      let i = 1;
+      const stack = [root];
+      while (i < A.length) {
+        const current = stack[stack.length - 1];
+        if (!current.left) {
+          current.left = { val: A[i], left: null, right: null };
+          stack.push(current.left);
+        } else if (!current.right) {
+          current.right = { val: A[i], left: null, right: null };
+          stack.pop();
+          stack.push(current.right);
+        }
+        i++;
+      }
+      return root;
+    }
+    function buildTreeFromInOrder(A = []) {
+      if (!A || A.length === 0) return null;
+      const mid = Math.floor(A.length / 2);
+      const root = { val: A[mid], left: null, right: null };
+      root.left = buildTreeFromInOrder(A.slice(0, mid));
+      root.right = buildTreeFromInOrder(A.slice(mid + 1));
+      return root;
+    }
+    function buildTreeFromLevelOrder(A = []) {
+      if (!A || A.length === 0) return null;
+      const root = { val: A[0], left: null, right: null };
+      const queue = [root];
+      let i = 1;
+      while (i < A.length) {
+        const current = queue.shift();
+        if (i < A.length) {
+          current.left = { val: A[i], left: null, right: null };
+          queue.push(current.left);
+          i++;
+        }
+        if (i < A.length) {
+          current.right = { val: A[i], left: null, right: null };
+          queue.push(current.right);
+          i++;
+        }
+      }
+      return root;
+    }
+
+  </script>
+
+</body>
+
+</html>

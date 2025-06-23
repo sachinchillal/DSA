@@ -2,27 +2,33 @@ package search;
 
 import helper.TestCaseArray;
 
-public class StairCase {
+public class SquareRoot {
 
   public static void main(String[] args) {
     System.out.println();
     TestCaseArray[] TestCases = {
         new TestCaseArray(1, 1),
         new TestCaseArray(2, 1),
-        new TestCaseArray(3, 2),
+        new TestCaseArray(3, 1),
 
-        new TestCaseArray(7, 3),
-        new TestCaseArray(10, 4),
-        new TestCaseArray(20, 5),
+        new TestCaseArray(4, 2),
+        new TestCaseArray(5, 2),
+        new TestCaseArray(6, 2),
+        new TestCaseArray(7, 2),
+        new TestCaseArray(8, 2),
 
-        new TestCaseArray(21, 6),
-        new TestCaseArray(28, 7),
+        new TestCaseArray(9, 3),
+        new TestCaseArray(10, 3),
+
+        new TestCaseArray(15, 3),
+        new TestCaseArray(16, 4),
+        new TestCaseArray(17, 4),
     };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int expected = testCase.R;
-      int result = findElement(testCase.N);
+      int result = findSquareRootOf(testCase.N);
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {
@@ -34,31 +40,26 @@ public class StairCase {
   }
 
   /**
-   * Given N number of Blocks, find count or max height of Staircase.
-   * - 1 block, 1 step
-   * 
-   * -
-   * -- 3 block, 2 steps
-   * 
-   * -
-   * --
-   * --- 6 block, 3 steps
-   * 
-   * m block, n steps
-   * m = n (n + 1) / 2;
+   * Given N number find square root of it
+   * 16 => 4
+   * 17 => 4
+   * 9 => 3
+   * 15 => 3
    */
-  public static int findElement(int n) {
-    int R = 0;
+  public static int findSquareRootOf(int n) {
     int low = 0;
     int high = n;
+    int R = 0;
     while (low <= high) {
       int mid = (low + high) / 2;
-      int stairs = mid * (mid + 1) / 2; // n(n+1)/2
-      if (stairs <= n) {
+      if (mid * mid == n) {
         R = mid;
-        low = mid + 1;
-      } else {
+        return mid;
+      } else if (mid * mid > n) {
         high = mid - 1;
+      } else {
+        R = mid; // Important
+        low = mid + 1;
       }
     }
     return R;
