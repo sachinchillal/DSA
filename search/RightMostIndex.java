@@ -3,34 +3,35 @@ package search;
 import helper.TestCaseArray;
 
 public class RightMostIndex {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(0, new int[] { 1 }, 1),
+      new TestCaseArray(1, new int[] { 1, 2 }, 2),
+      new TestCaseArray(2, new int[] { 1, 2, 3 }, 3),
+
+      new TestCaseArray(3, new int[] { 1, 2, 3, 4 }, 4),
+      new TestCaseArray(2, new int[] { 1, 2, 3, 4, 5 }, 3),
+      new TestCaseArray(1, new int[] { 1, 2, 3, 4, 5, 6 }, 2),
+
+      new TestCaseArray(0, new int[] { 1, 2, 3, 4, 5, 6, 7 }, 1),
+      // Returns -1
+      new TestCaseArray(-1, new int[] {}, 2),
+      new TestCaseArray(-1, new int[] { 7, 19, 13, 21 }, 2),
+
+      // Duplicates
+      new TestCaseArray(4, new int[] { 1, 2, 3, 4, 4, 5, 6, 7 }, 4),
+      new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4, 5, 6, 7 }, 4),
+      new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4, 5, 6, 7 }, 4),
+      new TestCaseArray(4, new int[] { 1, 4, 4, 4, 4, 5, 6, 7 }, 4),
+      new TestCaseArray(4, new int[] { 4, 4, 4, 4, 4, 5, 6, 7 }, 4),
+
+      new TestCaseArray(4, new int[] { 1, 2, 3, 4, 4 }, 4),
+      new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4 }, 4),
+      new TestCaseArray(4, new int[] { 1, 4, 4, 4, 4 }, 4),
+      new TestCaseArray(4, new int[] { 4, 4, 4, 4, 4 }, 4),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(0, new int[] { 1 }, 1),
-        new TestCaseArray(1, new int[] { 1, 2 }, 2),
-        new TestCaseArray(2, new int[] { 1, 2, 3 }, 3),
-
-        new TestCaseArray(3, new int[] { 1, 2, 3, 4 }, 4),
-        new TestCaseArray(2, new int[] { 1, 2, 3, 4, 5 }, 3),
-        new TestCaseArray(1, new int[] { 1, 2, 3, 4, 5, 6 }, 2),
-
-        new TestCaseArray(0, new int[] { 1, 2, 3, 4, 5, 6, 7 }, 1),
-        // Returns -1
-        new TestCaseArray(-1, new int[] {}, 2),
-        new TestCaseArray(-1, new int[] { 7, 19, 13, 21 }, 2),
-
-        // Duplicates
-        new TestCaseArray(4, new int[] { 1, 2, 3, 4, 4, 5, 6, 7 }, 4),
-        new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4, 5, 6, 7 }, 4),
-        new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4, 5, 6, 7 }, 4),
-        new TestCaseArray(4, new int[] { 1, 4, 4, 4, 4, 5, 6, 7 }, 4),
-        new TestCaseArray(4, new int[] { 4, 4, 4, 4, 4, 5, 6, 7 }, 4),
-
-        new TestCaseArray(4, new int[] { 1, 2, 3, 4, 4 }, 4),
-        new TestCaseArray(4, new int[] { 1, 2, 4, 4, 4 }, 4),
-        new TestCaseArray(4, new int[] { 1, 4, 4, 4, 4 }, 4),
-        new TestCaseArray(4, new int[] { 4, 4, 4, 4, 4 }, 4),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {

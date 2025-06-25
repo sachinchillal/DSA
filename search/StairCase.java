@@ -4,20 +4,21 @@ import helper.TestCaseArray;
 
 public class StairCase {
 
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(1, 1),
+      new TestCaseArray(2, 1),
+      new TestCaseArray(3, 2),
+
+      new TestCaseArray(7, 3),
+      new TestCaseArray(10, 4),
+      new TestCaseArray(20, 5),
+
+      new TestCaseArray(21, 6),
+      new TestCaseArray(28, 7),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(1, 1),
-        new TestCaseArray(2, 1),
-        new TestCaseArray(3, 2),
-
-        new TestCaseArray(7, 3),
-        new TestCaseArray(10, 4),
-        new TestCaseArray(20, 5),
-
-        new TestCaseArray(21, 6),
-        new TestCaseArray(28, 7),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {

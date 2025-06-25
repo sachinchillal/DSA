@@ -4,26 +4,27 @@ import helper.TestCaseArray;
 
 public class SquareRoot {
 
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(1, 1),
+      new TestCaseArray(2, 1),
+      new TestCaseArray(3, 1),
+
+      new TestCaseArray(4, 2),
+      new TestCaseArray(5, 2),
+      new TestCaseArray(6, 2),
+      new TestCaseArray(7, 2),
+      new TestCaseArray(8, 2),
+
+      new TestCaseArray(9, 3),
+      new TestCaseArray(10, 3),
+
+      new TestCaseArray(15, 3),
+      new TestCaseArray(16, 4),
+      new TestCaseArray(17, 4),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(1, 1),
-        new TestCaseArray(2, 1),
-        new TestCaseArray(3, 1),
-
-        new TestCaseArray(4, 2),
-        new TestCaseArray(5, 2),
-        new TestCaseArray(6, 2),
-        new TestCaseArray(7, 2),
-        new TestCaseArray(8, 2),
-
-        new TestCaseArray(9, 3),
-        new TestCaseArray(10, 3),
-
-        new TestCaseArray(15, 3),
-        new TestCaseArray(16, 4),
-        new TestCaseArray(17, 4),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {

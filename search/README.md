@@ -35,4 +35,4 @@ Programs similar to **"Find a Peak Element"**, here are a few algorithmic proble
 
 8. **Valley Element in an Array**
     -  [LocalMinimum](./LocalMinimum.java)
-    - Like peak element, but looking for a valley (element smaller than neighbors).
+    - Like peak element, but looking for a valley (element smaller than neighbours).

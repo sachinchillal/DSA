@@ -3,25 +3,26 @@ package search;
 import helper.TestCaseArray;
 
 public class BinarySearchAndMissingValue {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(0, new int[] { 1 }, 1),
+      new TestCaseArray(1, new int[] { 1, 2 }, 2),
+      new TestCaseArray(2, new int[] { 1, 2, 3 }, 3),
+
+      new TestCaseArray(3, new int[] { 1, 2, 3, 4 }, 4),
+      new TestCaseArray(2, new int[] { 1, 2, 3, 4, 5 }, 3),
+      new TestCaseArray(1, new int[] { 1, 2, 3, 4, 5, 6 }, 2),
+
+      new TestCaseArray(0, new int[] { 1, 2, 3, 4, 5, 6, 7 }, 1),
+      new TestCaseArray(2, new int[] { 1, 3, 5, 7, 9, 11 }, 5),
+      // Returns -1
+      // Next Position
+      new TestCaseArray(0, new int[] { 7, 19, 13, 21 }, 2),
+      new TestCaseArray(2, new int[] { 1, 3, 7, 9 }, 5),
+      new TestCaseArray(3, new int[] { 1, 3, 4 }, 5),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(0, new int[] { 1 }, 1),
-        new TestCaseArray(1, new int[] { 1, 2 }, 2),
-        new TestCaseArray(2, new int[] { 1, 2, 3 }, 3),
-
-        new TestCaseArray(3, new int[] { 1, 2, 3, 4 }, 4),
-        new TestCaseArray(2, new int[] { 1, 2, 3, 4, 5 }, 3),
-        new TestCaseArray(1, new int[] { 1, 2, 3, 4, 5, 6 }, 2),
-
-        new TestCaseArray(0, new int[] { 1, 2, 3, 4, 5, 6, 7 }, 1),
-        new TestCaseArray(2, new int[] { 1, 3, 5, 7, 9, 11 }, 5),
-        // Returns -1
-        // Next Position
-        new TestCaseArray(0, new int[] { 7, 19, 13, 21 }, 2),
-        new TestCaseArray(2, new int[] { 1, 3, 7, 9 }, 5),
-        new TestCaseArray(3, new int[] { 1, 3, 4 }, 5),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {

@@ -3,35 +3,36 @@ package search;
 import helper.TestCaseArray;
 
 public class LocalMinimum {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] {}, -1),
+      new TestCaseArray(new int[] { 1 }, 0),
+      new TestCaseArray(new int[] { 1, 2 }, 0),
+      new TestCaseArray(new int[] { 2, 1 }, 1),
+      new TestCaseArray(new int[] { 1, 1 }, -1),
+
+      new TestCaseArray(new int[] { 2, 1, 3 }, 1),
+      new TestCaseArray(new int[] { 2, 1, 3, 4 }, 1),
+      new TestCaseArray(new int[] { 3, 2, 1, 4 }, 2),
+
+      new TestCaseArray(new int[] { 1 }, 0),
+      new TestCaseArray(new int[] { 1, 2 }, 0),
+      new TestCaseArray(new int[] { 2, 1 }, 1),
+      new TestCaseArray(new int[] { 1, 2, 3 }, 0),
+      new TestCaseArray(new int[] { 3, 2, 1 }, 2),
+
+      new TestCaseArray(new int[] { 1, 3, 2, 4 }, 0),
+      // new TestCaseArray(new int[] { 1, 3, 2, 4 }, 2),
+      new TestCaseArray(new int[] { 5, 4, 3, 2, 1 }, 4),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 0),
+      new TestCaseArray(new int[] { 5, 3, 2, 4, 6 }, 2),
+
+      new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 0),
+      // new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 2),
+      // new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 4)
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] {}, -1),
-        new TestCaseArray(new int[] { 1 }, 0),
-        new TestCaseArray(new int[] { 1, 2 }, 0),
-        new TestCaseArray(new int[] { 2, 1 }, 1),
-        new TestCaseArray(new int[] { 1, 1 }, -1),
-
-        new TestCaseArray(new int[] { 2, 1, 3 }, 1),
-        new TestCaseArray(new int[] { 2, 1, 3, 4 }, 1),
-        new TestCaseArray(new int[] { 3, 2, 1, 4 }, 2),
-
-        new TestCaseArray(new int[] { 1 }, 0),
-        new TestCaseArray(new int[] { 1, 2 }, 0),
-        new TestCaseArray(new int[] { 2, 1 }, 1),
-        new TestCaseArray(new int[] { 1, 2, 3 }, 0),
-        new TestCaseArray(new int[] { 3, 2, 1 }, 2),
-
-        new TestCaseArray(new int[] { 1, 3, 2, 4 }, 0),
-        // new TestCaseArray(new int[] { 1, 3, 2, 4 }, 2),
-        new TestCaseArray(new int[] { 5, 4, 3, 2, 1 }, 4),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 0),
-        new TestCaseArray(new int[] { 5, 3, 2, 4, 6 }, 2),
-
-        new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 0),
-        // new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 2),
-        // new TestCaseArray(new int[] { 1, 2, 1, 2, 1 }, 4)
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
@@ -48,7 +49,7 @@ public class LocalMinimum {
   }
 
   /**
-   * Find element k where each neighbors are greater than it
+   * Find element k where each neighbours are greater than it
    * (m-1) + _____ + (m+1)
    * ______ + ___ +
    * __________+ m => This local minimum element

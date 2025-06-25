@@ -4,25 +4,26 @@ import helper.TestCaseArray;
 
 public class MinimumElementRotatedArray {
 
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] {}, -1),
+      new TestCaseArray(new int[] { 1 }, 1),
+      new TestCaseArray(new int[] { 1, 2 }, 1),
+      new TestCaseArray(new int[] { 2, 1 }, 1),
+      new TestCaseArray(new int[] { 1, 2, 3 }, 1),
+      new TestCaseArray(new int[] { 2, 4, 6 }, 2),
+
+      new TestCaseArray(new int[] { 3, 5, 7 }, 3),
+      new TestCaseArray(new int[] { 2, 3, 1 }, 1),
+      new TestCaseArray(new int[] { 6, 8, 2, 4 }, 2),
+      new TestCaseArray(new int[] { 12, 3, 6, 9 }, 3),
+      new TestCaseArray(new int[] { 12, 15, 3, 6, 9 }, 3),
+
+      new TestCaseArray(new int[] { 12, 15, 18, 3, 6, 9 }, 3),
+      new TestCaseArray(new int[] { 12, 15, 18, 3 }, 3)
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] {}, -1),
-        new TestCaseArray(new int[] { 1 }, 1),
-        new TestCaseArray(new int[] { 1, 2 }, 1),
-        new TestCaseArray(new int[] { 2, 1 }, 1),
-        new TestCaseArray(new int[] { 1, 2, 3 }, 1),
-        new TestCaseArray(new int[] { 2, 4, 6 }, 2),
-
-        new TestCaseArray(new int[] { 3, 5, 7 }, 3),
-        new TestCaseArray(new int[] { 2, 3, 1 }, 1),
-        new TestCaseArray(new int[] { 6, 8, 2, 4 }, 2),
-        new TestCaseArray(new int[] { 12, 3, 6, 9 }, 3),
-        new TestCaseArray(new int[] { 12, 15, 3, 6, 9 }, 3),
-
-        new TestCaseArray(new int[] { 12, 15, 18, 3, 6, 9 }, 3),
-        new TestCaseArray(new int[] { 12, 15, 18, 3 }, 3)
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
