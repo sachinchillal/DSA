@@ -2,6 +2,7 @@ package tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Stack;
 
 import helper.TestCaseArray;
@@ -44,9 +45,10 @@ public class PostOrderTraversal {
    */
   public static int[] postOrderTraversal(TreeNode root) {
     ArrayList<Integer> R = new ArrayList<>();
+    // postOrderRecursive(root, R);
     postOrderIterative(root, R);
     // postOrderIterative2(root, R);
-    // postOrderRecursive(root, R);
+    // postOrderIterative3(root, R);
     return R.stream().mapToInt(e -> e).toArray();
   }
 
@@ -81,16 +83,36 @@ public class PostOrderTraversal {
         s.push(n.right);
       }
     }
+
     while (s2.size() > 0) {
       TreeNode n = s2.pop();
       R.add(n.val);
     }
   }
 
+  public static void postOrderIterative2(TreeNode root, ArrayList<Integer> R) {
+    if (root == null) {
+      return;
+    }
+    Stack<TreeNode> s = new Stack<>();
+    s.push(root);
+    while (s.size() > 0) {
+      TreeNode n = s.pop();
+      R.add(n.val);
+      if (n.left != null) {
+        s.push(n.left);
+      }
+      if (n.right != null) {
+        s.push(n.right);
+      }
+    }
+    Collections.reverse(R);
+  }
+
   /*
    * Using Pointer Method
    */
-  public static void postOrderIterative2(TreeNode root, ArrayList<Integer> R) {
+  public static void postOrderIterative3(TreeNode root, ArrayList<Integer> R) {
     TreeNode current = root;
     TreeNode lastVisited = null;
     Stack<TreeNode> s = new Stack<>();

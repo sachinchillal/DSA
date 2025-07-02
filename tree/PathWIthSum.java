@@ -30,7 +30,8 @@ public class PathWIthSum {
     for (TestCaseArray testCase : TestCases) {
       boolean expected = testCase.Rb;
       TreeNode root = Tree.arrayToTree(testCase.A);
-      boolean result = isPathExistWithSum(root, testCase.Bi);
+      boolean result = isPathExistWithSumUtilLeaf(root, testCase.Bi);
+      // boolean result = isPathExistWithSum(root, testCase.Bi);
 
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
@@ -40,6 +41,35 @@ public class PathWIthSum {
       }
       count++;
     }
+  }
+
+  /**
+   * A utility function to find if a path with a given sum exists from the current
+   * node to a leaf.
+   *
+   * @param node The current node in the traversal.
+   * @param K    The remaining sum required to find a valid path.
+   * @return True if a path from the current node to a leaf with the remaining sum
+   *         exists, false otherwise.
+   */
+  public static boolean isPathExistWithSumUtilLeaf(TreeNode node, int K) {
+    // Base case: if the node is null, no path exists.
+    if (node == null) {
+      return false;
+    }
+
+    // Check if the current node is a leaf node.
+    if (node.left == null && node.right == null) {
+      // If it is a leaf, check if its value equals the remaining sum.
+      return (K == node.val);
+    }
+
+    // Recursively check the left and right subtrees with the updated sum.
+    boolean leftPathExists = isPathExistWithSumUtilLeaf(node.left, K - node.val);
+    boolean rightPathExists = isPathExistWithSumUtilLeaf(node.right, K - node.val);
+
+    // Return true if a path exists in either the left or the right subtree.
+    return leftPathExists || rightPathExists;
   }
 
   static boolean isExist = false;

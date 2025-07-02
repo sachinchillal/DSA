@@ -58,7 +58,6 @@ public class BSTInsertion {
       root.left = insertionInBinarySearchTree(root.left, K);
     } else {
       root.right = insertionInBinarySearchTree(root.right, K);
-
     }
     return root;
   }

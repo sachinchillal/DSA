@@ -27,6 +27,7 @@ public class PaintersPartition {
       new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, 11),
       new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, 3, 15),
       new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 3, 17),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, 5, 15),
       // not sorted
       new TestCaseArray(new int[] { 1, 4, 2, 5, 9, 6, 7, 3, 8 }, 3, 18),
   };
@@ -49,6 +50,12 @@ public class PaintersPartition {
   }
 
   /**
+   * Similar Problem: Painter's Partition Problem
+   * 1. Painters Partition Problem with time
+   * 2. Shipping Packages (Ship Packages within D Days)
+   * 3. Allocate Books (Allocate Books to students)
+   * 4. Allocate Minimum Number of Pages (Allocate pages to students)
+   * 5. Allocate Minimum Number of Chocolates (Allocate chocolates to students)
    * 
    * @param A[i] no. of time required to paint i board
    * @param K    no. of painter available

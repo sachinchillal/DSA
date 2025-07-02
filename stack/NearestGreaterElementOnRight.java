@@ -42,6 +42,7 @@ public class NearestGreaterElementOnRight {
    * Next Greater Element II
    * Daily Temperatures (find next greater temperature)
    * Online Stock Span (find previous greater element)
+   * Largest Rectangle In Histogram
    */
   public static int[] findRightGreaterElement(int[] A) {
     int n = A.length;
@@ -60,6 +61,10 @@ public class NearestGreaterElementOnRight {
         R[i] = -1;
       } else {
         R[i] = stack.peek();
+        /**
+         * For temperature problems
+         * R[i] = stack.peek() - i;
+         */
       }
       stack.push(A[i]);
     }

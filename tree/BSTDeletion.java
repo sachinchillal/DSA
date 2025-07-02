@@ -61,11 +61,7 @@ public class BSTDeletion {
     if (root == null) {
       return null;
     }
-    if (K > root.val) {
-      root.right = deletionInBinarySearchTree(root.right, K);
-    } else if (K < root.val) {
-      root.left = deletionInBinarySearchTree(root.left, K);
-    } else {
+    if (root.val == K) {
       if (root.left == null) {
         return root.right; // can be null or node
       } else if (root.right == null) {
@@ -76,6 +72,10 @@ public class BSTDeletion {
       // Delete: copy that value here
       root.val = nodeMin.val;
       root.right = deletionInBinarySearchTree(root.right, nodeMin.val);
+    } else if (root.val > K) {
+      root.left = deletionInBinarySearchTree(root.left, K);
+    } else {
+      root.right = deletionInBinarySearchTree(root.right, K);
     }
     return root;
   }

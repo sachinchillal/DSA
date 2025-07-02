@@ -14,6 +14,7 @@ public class TestCaseArray {
   public String S;
 
   public int[] R_Array; // Result
+  public int[][] R_2Array; // Result 2 D array
   public int R; // Result
   public String Rs; // String Result
   public Boolean Rb; // Boolean Result
@@ -37,6 +38,12 @@ public class TestCaseArray {
     this.A = A;
     this.B = B;
     this.R = R;
+  }
+
+  public TestCaseArray(int[] A, int Bi, int[] R) {
+    this.A = A;
+    this.Bi = Bi;
+    this.R_Array = R;
   }
 
   public TestCaseArray(int[] A, int[] B, int[] R) {
@@ -72,6 +79,11 @@ public class TestCaseArray {
   public TestCaseArray(int[] A, int[] R_Array) {
     this.A = A;
     this.R_Array = R_Array;
+  }
+
+  public TestCaseArray(int[] A, int[][] R_2Array) {
+    this.A = A;
+    this.R_2Array = R_2Array;
   }
 
   public Object[] params; // n no. of function params
