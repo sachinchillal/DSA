@@ -1,0 +1,62 @@
+package maths;
+
+import java.util.Arrays;
+
+import helper.TestCaseArray;
+
+public class AllPrimeNumbers {
+  public static void main(String[] args) {
+    System.out.println();
+    TestCaseArray[] TestCases = {
+        new TestCaseArray(0, new int[] {}),
+        new TestCaseArray(1, new int[] {}),
+        new TestCaseArray(2, new int[] { 2 }),
+        new TestCaseArray(3, new int[] { 2, 3 }),
+        new TestCaseArray(4, new int[] { 2, 3 }),
+
+        new TestCaseArray(5, new int[] { 2, 3, 5 }),
+        new TestCaseArray(6, new int[] { 2, 3, 5 }),
+        new TestCaseArray(7, new int[] { 2, 3, 5, 7 }),
+        new TestCaseArray(10, new int[] { 2, 3, 5, 7 }),
+        new TestCaseArray(14, new int[] { 2, 3, 5, 7, 11, 13 }),
+        new TestCaseArray(60, new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59 }),
+    };
+
+    int count = 1;
+    for (TestCaseArray testCase : TestCases) {
+      int[] expected = testCase.R_Array;
+      int[] result = findAllPrimeNumbers(testCase.N);
+      if (Arrays.equals(result, expected)) {
+        System.out.println(count + " Test case Passed!");
+      } else {
+        System.out.println(count + " Test case failed!");
+        System.out.println("Expected: " + Arrays.toString(expected) + ", Result: " + Arrays.toString(result) + "\n");
+      }
+      count++;
+    }
+  }
+
+  public static int[] findAllPrimeNumbers(int N) {
+    int[] R = new int[N];
+    boolean[] isPrime = new boolean[N + 1];
+    Arrays.fill(isPrime, true);
+
+    for (int i = 2; i * i <= N; i++) {
+      if (isPrime[i]) {
+        for (int j = i * i; j <= N; j += i) {
+          isPrime[j] = false;
+        }
+      }
+    }
+
+    int index = 0;
+    for (int i = 2; i <= N; i++) {
+      if (isPrime[i]) {
+        R[index++] = i;
+      }
+    }
+
+    return Arrays.copyOf(R, index);
+  }
+
+}

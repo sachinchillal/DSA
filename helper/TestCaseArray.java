@@ -2,6 +2,7 @@ package helper;
 
 public class TestCaseArray {
   public int[] A;
+  public int[][] A_2Array; // 2D array
   public String[] As;
   public int N;
 
@@ -13,6 +14,7 @@ public class TestCaseArray {
 
   public String S;
 
+  public String[] Rs_Array;
   public int[] R_Array; // Result
   public int[][] R_2Array; // Result 2 D array
   public int R; // Result
@@ -34,20 +36,43 @@ public class TestCaseArray {
     this.R = R;
   }
 
+  public TestCaseArray(String[] As, String[] Rs_Array) {
+    this.As = As;
+    this.Rs_Array = Rs_Array;
+  }
+
   public TestCaseArray(int[] A, int[] B, int R) {
     this.A = A;
     this.B = B;
     this.R = R;
   }
 
-  public TestCaseArray(int[] A, int Bi, int[] R) {
+  public TestCaseArray(int[] A, int[] B, int[] C, int R) {
+    this.A = A;
+    this.B = B;
+    this.C = C;
+    this.R = R;
+  }
+
+  public TestCaseArray(int[] A, int Bi, int[] R_Array) {
     this.A = A;
     this.Bi = Bi;
-    this.R_Array = R;
+    this.R_Array = R_Array;
   }
 
   public TestCaseArray(int[] A, int[] B, int[] R) {
     this.A = A;
+    this.B = B;
+    this.R_Array = R;
+  }
+
+  public TestCaseArray(int N, int[] R) {
+    this.N = N;
+    this.R_Array = R;
+  }
+
+  public TestCaseArray(int N, int[] B, int[] R) {
+    this.N = N;
     this.B = B;
     this.R_Array = R;
   }
@@ -84,6 +109,22 @@ public class TestCaseArray {
   public TestCaseArray(int[] A, int[][] R_2Array) {
     this.A = A;
     this.R_2Array = R_2Array;
+  }
+
+  public TestCaseArray(int[] A, int[][] A_2Array, int[] R_Array) {
+    this.A = A;
+    this.A_2Array = A_2Array;
+    this.R_Array = R_Array;
+  }
+
+  public TestCaseArray(int[][] A_2Array, int[][] R_2Array) {
+    this.A_2Array = A_2Array;
+    this.R_2Array = R_2Array;
+  }
+
+  public TestCaseArray(int[][] R_2Array, int R) {
+    this.R_2Array = R_2Array;
+    this.R = R;
   }
 
   public Object[] params; // n no. of function params
