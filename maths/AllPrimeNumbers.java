@@ -5,22 +5,23 @@ import java.util.Arrays;
 import helper.TestCaseArray;
 
 public class AllPrimeNumbers {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(0, new int[] {}),
+      new TestCaseArray(1, new int[] {}),
+      new TestCaseArray(2, new int[] { 2 }),
+      new TestCaseArray(3, new int[] { 2, 3 }),
+      new TestCaseArray(4, new int[] { 2, 3 }),
+
+      new TestCaseArray(5, new int[] { 2, 3, 5 }),
+      new TestCaseArray(6, new int[] { 2, 3, 5 }),
+      new TestCaseArray(7, new int[] { 2, 3, 5, 7 }),
+      new TestCaseArray(10, new int[] { 2, 3, 5, 7 }),
+      new TestCaseArray(14, new int[] { 2, 3, 5, 7, 11, 13 }),
+      new TestCaseArray(60, new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59 }),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(0, new int[] {}),
-        new TestCaseArray(1, new int[] {}),
-        new TestCaseArray(2, new int[] { 2 }),
-        new TestCaseArray(3, new int[] { 2, 3 }),
-        new TestCaseArray(4, new int[] { 2, 3 }),
-
-        new TestCaseArray(5, new int[] { 2, 3, 5 }),
-        new TestCaseArray(6, new int[] { 2, 3, 5 }),
-        new TestCaseArray(7, new int[] { 2, 3, 5, 7 }),
-        new TestCaseArray(10, new int[] { 2, 3, 5, 7 }),
-        new TestCaseArray(14, new int[] { 2, 3, 5, 7, 11, 13 }),
-        new TestCaseArray(60, new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59 }),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
@@ -45,6 +46,7 @@ public class AllPrimeNumbers {
       if (isPrime[i]) {
         for (int j = i * i; j <= N; j += i) {
           isPrime[j] = false;
+          // printArray(i, j, isPrime); // for tracing the sieve process
         }
       }
     }
@@ -57,6 +59,42 @@ public class AllPrimeNumbers {
     }
 
     return Arrays.copyOf(R, index);
+  }
+
+  public static int[] findAllPrimeNumbers2(int N) {
+    int[] R = new int[N];
+    boolean[] isPrime = new boolean[N + 1];
+    Arrays.fill(isPrime, true);
+
+    for (int i = 2; i <= Math.sqrt(N); i++) {
+      if (isPrime[i]) {
+        for (int j = i * i; j <= N; j += i) {
+          isPrime[j] = false;
+          // printArray(i, j, isPrime); // for tracing the sieve process
+        }
+      }
+    }
+
+    int index = 0;
+    for (int i = 2; i <= N; i++) {
+      if (isPrime[i]) {
+        R[index++] = i;
+      }
+    }
+
+    return Arrays.copyOf(R, index);
+  }
+
+  static void printArray(int i, int j, boolean[] A) {
+    System.out.print("(" + i + ", " + j + ") ");
+    for (int k = 0; k < A.length; k++) {
+      if (A[k]) {
+        System.out.print(k + " ");
+      } else {
+        System.out.print("X ");
+      }
+    }
+    System.out.println();
   }
 
 }

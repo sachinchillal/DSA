@@ -106,6 +106,11 @@ public class TestCaseArray {
     this.R_Array = R_Array;
   }
 
+  public TestCaseArray(int N, int[][] R_2Array) {
+    this.N = N;
+    this.R_2Array = R_2Array;
+  }
+
   public TestCaseArray(int[] A, int[][] R_2Array) {
     this.A = A;
     this.R_2Array = R_2Array;
@@ -122,16 +127,22 @@ public class TestCaseArray {
     this.R_2Array = R_2Array;
   }
 
-  public TestCaseArray(int[][] R_2Array, int R) {
-    this.R_2Array = R_2Array;
+  public TestCaseArray(int[][] A_2Array, int R) {
+    this.A_2Array = A_2Array;
     this.R = R;
+  }
+
+  public TestCaseArray(int[][] A_2Array, int N, boolean Rb) {
+    this.A_2Array = A_2Array;
+    this.N = N;
+    this.Rb = Rb;
   }
 
   public Object[] params; // n no. of function params
 
-  public TestCaseArray(int R, Object... p) {
+  public TestCaseArray(int R, Object... params) {
     this.R = R;
-    params = p;
+    this.params = params;
   }
 
   public TestCaseArray(String s, Object... p) {

@@ -3,24 +3,24 @@ package maths;
 import helper.TestCaseArray;
 
 public class FactorsCount {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(0, 0),
+      new TestCaseArray(1, 1),
+      new TestCaseArray(2, 2),
+      new TestCaseArray(3, 2),
+      new TestCaseArray(4, 3),
+
+      new TestCaseArray(5, 2),
+      new TestCaseArray(6, 4),
+      new TestCaseArray(7, 2),
+      new TestCaseArray(8, 4),
+      new TestCaseArray(9, 3),
+
+      new TestCaseArray(10, 4),
+  };
 
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(0, 0),
-        new TestCaseArray(1, 1),
-        new TestCaseArray(2, 2),
-        new TestCaseArray(3, 2),
-        new TestCaseArray(4, 3),
-
-        new TestCaseArray(5, 2),
-        new TestCaseArray(6, 4),
-        new TestCaseArray(7, 2),
-        new TestCaseArray(8, 4),
-        new TestCaseArray(9, 3),
-
-        new TestCaseArray(10, 4),
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
