@@ -39,7 +39,7 @@ public class BSTDeletion {
     // int count = 1;
     for (TestCaseArray testCase : TestCases) {
       TreeNode root = Tree.arrayToBinarySearchTree(testCase.A);
-      TreeNode result = deletionInBinarySearchTree(root, testCase.Bi);
+      TreeNode result = deletionInBinarySearchTree(root, testCase.N);
       if (result == null) {
         System.out.println("Result: " + result);
       } else {

@@ -27,7 +27,7 @@ public class SlidingWindowMax {
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] expected = testCase.R_Array;
-      int[] result = findMaxElementInSlidingWindow(testCase.A, testCase.Bi);
+      int[] result = findMaxElementInSlidingWindow(testCase.A, testCase.N);
       if (Arrays.equals(result, expected)) {
         System.out.println(count + " Test case Passed!");
       } else {

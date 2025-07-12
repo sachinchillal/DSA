@@ -20,7 +20,7 @@ public class PriorityQueues {
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       boolean expected = testCase.Rb;
-      boolean result = canFormPerfectLine(testCase.A, testCase.Bi);
+      boolean result = canFormPerfectLine(testCase.A, testCase.N);
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {

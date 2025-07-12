@@ -34,7 +34,7 @@ public class AggressiveCows {
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int expected = testCase.R;
-      int result = minimumDistanceBetweenEachCow(testCase.A, testCase.Bi);
+      int result = minimumDistanceBetweenEachCow(testCase.A, testCase.N);
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {

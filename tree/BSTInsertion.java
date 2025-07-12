@@ -35,7 +35,7 @@ public class BSTInsertion {
     // int count = 1;
     for (TestCaseArray testCase : TestCases) {
       TreeNode root = Tree.arrayToBinarySearchTree(testCase.A);
-      TreeNode result = insertionInBinarySearchTree(root, testCase.Bi);
+      TreeNode result = insertionInBinarySearchTree(root, testCase.N);
       System.out.println(result.deepToStringLikeTree());
 
       // if (result == expected) {

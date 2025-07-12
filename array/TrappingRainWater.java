@@ -1,22 +1,23 @@
 
 public class TrappingRainWater {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] { 1 }, 0),
+      new TestCaseArray(new int[] { 2 }, 0),
+      new TestCaseArray(new int[] { 3 }, 0),
+      new TestCaseArray(new int[] { -5 }, 0),
+      new TestCaseArray(new int[] { 1, 2 }, 0),
+      new TestCaseArray(new int[] { 2, 3 }, 0),
+      new TestCaseArray(new int[] { 1, 3 }, 0),
+      new TestCaseArray(new int[] { 2, 3, 1, 2 }, 1),
+      new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 2),
+      new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 0),
+      new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
+      new TestCaseArray(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, 6),
+      new TestCaseArray(new int[] { 1, 1, 3, 2, 1, 2, 5, 3, 2, 1, 4, 2 }, 10),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] { 1 }, 0),
-        new TestCaseArray(new int[] { 2 }, 0),
-        new TestCaseArray(new int[] { 3 }, 0),
-        new TestCaseArray(new int[] { -5 }, 0),
-        new TestCaseArray(new int[] { 1, 2 }, 0),
-        new TestCaseArray(new int[] { 2, 3 }, 0),
-        new TestCaseArray(new int[] { 1, 3 }, 0),
-        new TestCaseArray(new int[] { 2, 3, 1, 2 }, 1),
-        new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 2),
-        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 0),
-        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
-        new TestCaseArray(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 }, 6),
-        new TestCaseArray(new int[] { 1, 1, 3, 2, 1, 2, 5, 3, 2, 1, 4, 2 }, 10),
-    };
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] A = testCase.A;

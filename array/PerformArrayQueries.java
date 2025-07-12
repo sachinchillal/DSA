@@ -3,7 +3,6 @@ import java.util.Arrays;
 import helper.TestCaseArray;
 
 public class PerformArrayQueries {
-
   static TestCaseArray[] TestCases = {
       new TestCaseArray(new int[] { 0, 0 }, new int[][] {}, new int[] { 0, 0 }),
       new TestCaseArray(new int[] { 0, 0, 0 }, new int[][] { new int[] { 3, 5 } }, new int[] { 0, 0, 0 }),

@@ -7,7 +7,6 @@ public class TestCaseArray {
   public int N;
 
   public int[] B;
-  public int Bi;
 
   public int[] C;
   public int Ci;
@@ -41,6 +40,11 @@ public class TestCaseArray {
     this.Rs_Array = Rs_Array;
   }
 
+  public TestCaseArray(int N, String[] Rs_Array) {
+    this.N = N;
+    this.Rs_Array = Rs_Array;
+  }
+
   public TestCaseArray(int[] A, int[] B, int R) {
     this.A = A;
     this.B = B;
@@ -54,9 +58,9 @@ public class TestCaseArray {
     this.R = R;
   }
 
-  public TestCaseArray(int[] A, int Bi, int[] R_Array) {
+  public TestCaseArray(int[] A, int N, int[] R_Array) {
     this.A = A;
-    this.Bi = Bi;
+    this.N = N;
     this.R_Array = R_Array;
   }
 
@@ -77,21 +81,21 @@ public class TestCaseArray {
     this.R_Array = R;
   }
 
-  public TestCaseArray(int[] A, int Bi, Boolean Rb) {
+  public TestCaseArray(int[] A, int N, Boolean Rb) {
     this.A = A;
-    this.Bi = Bi;
+    this.N = N;
     this.Rb = Rb;
   }
 
-  public TestCaseArray(int[] A, int Bi, int R) {
+  public TestCaseArray(int[] A, int N, int R) {
     this.A = A;
-    this.Bi = Bi;
+    this.N = N;
     this.R = R;
   }
 
-  public TestCaseArray(int[] A, int Bi, int Ci, int R) {
+  public TestCaseArray(int[] A, int N, int Ci, int R) {
     this.A = A;
-    this.Bi = Bi;
+    this.N = N;
     this.Ci = Ci;
     this.R = R;
   }
@@ -143,6 +147,17 @@ public class TestCaseArray {
   public TestCaseArray(int R, Object... params) {
     this.R = R;
     this.params = params;
+  }
+
+  // String
+  public TestCaseArray(String S, int R) {
+    this.S = S;
+    this.R = R;
+  }
+
+  public TestCaseArray(int N, String Rs) {
+    this.N = N;
+    this.Rs = Rs;
   }
 
   public TestCaseArray(String s, Object... p) {

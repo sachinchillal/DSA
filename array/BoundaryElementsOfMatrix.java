@@ -2,16 +2,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BoundaryElementsOfMatrix {
+  static TestCaseMatrix[] TestCases = {
+      new TestCaseMatrix(new int[][] { { 1 } }, new int[] { 1 }),
+      new TestCaseMatrix(new int[][] { { 1, 2 }, { 4, 5 } }, new int[] { 1, 2, 5, 4 }),
+      new TestCaseMatrix(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }, new int[] { 1, 2, 3, 6, 9, 8, 7, 4 }),
+      new TestCaseMatrix(new int[][] { { 1, 2, 3, 4 }, { 5, 6, 7, 8 },
+          { 9, 10, 11, 12 }, { 13, 14, 15, 16 } },
+          new int[] { 1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5 }),
+  };
+
   public static void main(String[] args) {
     System.err.println();
-    TestCaseMatrix[] TestCases = {
-        new TestCaseMatrix(new int[][] { { 1 } }, new int[] { 1 }),
-        new TestCaseMatrix(new int[][] { { 1, 2 }, { 4, 5 } }, new int[] { 1, 2, 5, 4 }),
-        new TestCaseMatrix(new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } }, new int[] { 1, 2, 3, 6, 9, 8, 7, 4 }),
-        new TestCaseMatrix(new int[][] { { 1, 2, 3, 4 }, { 5, 6, 7, 8 },
-            { 9, 10, 11, 12 }, { 13, 14, 15, 16 } },
-            new int[] { 1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5 }),
-    };
     int count = 1;
     for (TestCaseMatrix testCase : TestCases) {
       int[] expected = testCase.R;

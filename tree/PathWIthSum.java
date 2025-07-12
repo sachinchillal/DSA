@@ -30,8 +30,8 @@ public class PathWIthSum {
     for (TestCaseArray testCase : TestCases) {
       boolean expected = testCase.Rb;
       TreeNode root = Tree.arrayToTree(testCase.A);
-      boolean result = isPathExistWithSumUtilLeaf(root, testCase.Bi);
-      // boolean result = isPathExistWithSum(root, testCase.Bi);
+      boolean result = isPathExistWithSumUtilLeaf(root, testCase.N);
+      // boolean result = isPathExistWithSum(root, testCase.N);
 
       if (result == expected) {
         System.out.println(count + " Test case Passed!");

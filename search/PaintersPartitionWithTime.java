@@ -39,7 +39,7 @@ public class PaintersPartitionWithTime {
     for (TestCaseArray testCase : TestCases) {
       int expected = testCase.R;
 
-      int result = minimumTimRequiredToPaintWithTime(testCase.A, testCase.Bi, (testCase.Ci == 0) ? 1 : testCase.Ci);
+      int result = minimumTimRequiredToPaintWithTime(testCase.A, testCase.N, (testCase.Ci == 0) ? 1 : testCase.Ci);
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {

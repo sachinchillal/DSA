@@ -20,7 +20,7 @@ public class TaskScheduler {
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] expected = testCase.R_Array;
-      int[] result = findQueueArrangement(testCase.A, testCase.Bi);
+      int[] result = findQueueArrangement(testCase.A, testCase.N);
       if (Arrays.equals(result, expected)) {
         System.out.println(count + " Test case Passed!");
       } else {

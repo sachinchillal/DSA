@@ -29,7 +29,7 @@ public class BSTSearching {
     for (TestCaseArray testCase : TestCases) {
       boolean expected = testCase.Rb;
       TreeNode root = Tree.arrayToBinarySearchTree(testCase.A);
-      boolean result = searchingInBinarySearchTree(root, testCase.Bi);
+      boolean result = searchingInBinarySearchTree(root, testCase.N);
 
       if (result == expected) {
         System.out.println(count + " Test case Passed!");

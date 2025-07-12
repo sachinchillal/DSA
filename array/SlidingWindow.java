@@ -20,7 +20,7 @@ public class SlidingWindow {
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] expected = testCase.R_Array;
-      int[] result = slidingWindow(testCase.A, testCase.Bi);
+      int[] result = slidingWindow(testCase.A, testCase.N);
       if (Arrays.equals(result, expected)) {
         System.out.println(count + " Test case Passed!");
       } else {
