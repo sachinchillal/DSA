@@ -1,6 +1,6 @@
 package queue;
 
-import linkedlist.ListNode;
+import helper.ListNode;
 
 public class QueueUsingLinkedList {
   static ListNode head = null;

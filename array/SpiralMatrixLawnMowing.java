@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class SpiralMatrixLawnMowing {
   public static void main(String[] args) {
-    System.err.println();
+    System.out.println();
     TestCaseMatrix[] TestCases = {
         new TestCaseMatrix(new int[][] { { 1 } }, new int[] { 1 }),
         new TestCaseMatrix(new int[][] { { 1, 2 }, { 4, 5 } }, new int[] { 1, 2, 5, 4 }),

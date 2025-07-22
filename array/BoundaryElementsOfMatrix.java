@@ -12,7 +12,7 @@ public class BoundaryElementsOfMatrix {
   };
 
   public static void main(String[] args) {
-    System.err.println();
+    System.out.println();
     int count = 1;
     for (TestCaseMatrix testCase : TestCases) {
       int[] expected = testCase.R;

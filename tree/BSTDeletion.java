@@ -3,39 +3,39 @@ package tree;
 import helper.TestCaseArray;
 
 public class BSTDeletion {
+  static TestCaseArray[] TestCases = {
+      // deleting right node
+      new TestCaseArray(new int[] { 1 }, 1, true),
+      new TestCaseArray(new int[] { 1, 2 }, 2, true),
+      new TestCaseArray(new int[] { 1, 2, 3 }, 3, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4 }, 4, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 5, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, 6, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 7, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 7 }, 7, true),
+
+      // no deletion
+      new TestCaseArray(new int[] {}, 3, false),
+      new TestCaseArray(new int[] { 1 }, 2, false),
+      new TestCaseArray(new int[] { 1, 2 }, 3, false),
+      new TestCaseArray(new int[] { 1, 2, 3 }, 4, false),
+      new TestCaseArray(new int[] { 1, 2, 3, 4 }, 5, false),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 6, false),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, 7, false),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 8, false),
+
+      // deleting left node
+      new TestCaseArray(new int[] { 1, 2, 3 }, 1, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4 }, 2, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 2, true),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, true),
+
+      // node having 2 children
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 2, true),
+  };
+
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        // deleting right node
-        new TestCaseArray(new int[] { 1 }, 1, true),
-        new TestCaseArray(new int[] { 1, 2 }, 2, true),
-        new TestCaseArray(new int[] { 1, 2, 3 }, 3, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, 4, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 5, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, 6, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 7, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 7 }, 7, true),
-
-        // no deletion
-        new TestCaseArray(new int[] {}, 3, false),
-        new TestCaseArray(new int[] { 1 }, 2, false),
-        new TestCaseArray(new int[] { 1, 2 }, 3, false),
-        new TestCaseArray(new int[] { 1, 2, 3 }, 4, false),
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, 5, false),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 6, false),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, 7, false),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 8, false),
-
-        // deleting left node
-        new TestCaseArray(new int[] { 1, 2, 3 }, 1, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, 2, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 2, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, true),
-
-        // node having 2 children
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 2, true),
-    };
-
     // int count = 1;
     for (TestCaseArray testCase : TestCases) {
       TreeNode root = Tree.arrayToBinarySearchTree(testCase.A);

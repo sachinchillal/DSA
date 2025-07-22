@@ -1,5 +1,7 @@
 package linkedlist;
 
+import helper.ListNode;
+
 class CustomStack {
 
   private ListNode top = null;// new ListNode(0);

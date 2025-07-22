@@ -5,22 +5,22 @@ import java.util.Arrays;
 import helper.TestCaseArray;
 
 public class Merge2SortedArrays {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] { 1, 2 }, new int[] { 3, 4 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 3, 4 }, new int[] { 1, 2 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 1, 3 }, new int[] { 2, 4 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 2, 3, 4 }, new int[] { 1 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 1, 3, 4 }, new int[] { 2 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 1, 2, 4 }, new int[] { 3 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 4 }, new int[] { 1, 2, 3, 4 }),
+      new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 5, 6, 7 }, new int[] { 1, 2, 3, 5, 6, 7 }),
+      new TestCaseArray(new int[] { 1, 3 }, new int[] { 5, 7 }, new int[] { 1, 3, 5, 7 }),
+      new TestCaseArray(new int[] { 1, 3, 5 }, new int[] { 7, 9 }, new int[] { 1, 3, 5, 7, 9 }),
+      new TestCaseArray(new int[] { 6 }, new int[] { 5, 7 }, new int[] { 5, 6, 7 }),
+  };
 
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] { 1, 2 }, new int[] { 3, 4 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 3, 4 }, new int[] { 1, 2 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 1, 3 }, new int[] { 2, 4 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 2, 3, 4 }, new int[] { 1 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 1, 3, 4 }, new int[] { 2 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 1, 2, 4 }, new int[] { 3 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 4 }, new int[] { 1, 2, 3, 4 }),
-        new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 5, 6, 7 }, new int[] { 1, 2, 3, 5, 6, 7 }),
-        new TestCaseArray(new int[] { 1, 3 }, new int[] { 5, 7 }, new int[] { 1, 3, 5, 7 }),
-        new TestCaseArray(new int[] { 1, 3, 5 }, new int[] { 7, 9 }, new int[] { 1, 3, 5, 7, 9 }),
-        new TestCaseArray(new int[] { 6 }, new int[] { 5, 7 }, new int[] { 5, 6, 7 }),
-    };
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] A = testCase.A;

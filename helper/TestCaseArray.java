@@ -1,10 +1,15 @@
 package helper;
 
 public class TestCaseArray {
-  public int[] A;
+  public int[] A; // Array A
+  public int[] A2; // Array 2
+
   public int[][] A_2Array; // 2D array
+  public int[][] Matrix; // 2D array
+
   public String[] As;
   public int N;
+  public int M;
 
   public int[] B;
 
@@ -45,6 +50,12 @@ public class TestCaseArray {
     this.Rs_Array = Rs_Array;
   }
 
+  public TestCaseArray(int N, int M, String[] Rs_Array) {
+    this.N = N;
+    this.M = M;
+    this.Rs_Array = Rs_Array;
+  }
+
   public TestCaseArray(int[] A, int[] B, int R) {
     this.A = A;
     this.B = B;
@@ -64,10 +75,10 @@ public class TestCaseArray {
     this.R_Array = R_Array;
   }
 
-  public TestCaseArray(int[] A, int[] B, int[] R) {
+  public TestCaseArray(int[] A, int[] B, int[] R_Array) {
     this.A = A;
     this.B = B;
-    this.R_Array = R;
+    this.R_Array = R_Array;
   }
 
   public TestCaseArray(int N, int[] R) {
@@ -133,6 +144,13 @@ public class TestCaseArray {
 
   public TestCaseArray(int[][] A_2Array, int R) {
     this.A_2Array = A_2Array;
+    this.R = R;
+  }
+
+  public TestCaseArray(int[][] Matrix, int[] A, int[] A2, int R) {
+    this.Matrix = Matrix;
+    this.A = A;
+    this.A2 = A2;
     this.R = R;
   }
 

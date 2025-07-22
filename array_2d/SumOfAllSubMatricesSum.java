@@ -18,7 +18,7 @@ public class SumOfAllSubMatricesSum {
   };
 
   public static void main(String[] args) {
-    System.err.println();
+    System.out.println();
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int expected = testCase.R;

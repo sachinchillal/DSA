@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Populating Next Right Pointers Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .node-circle {
+      transition: all 0.5s ease-in-out;
+    }
+
+    .node-text {
+      transition: all 0.5s ease-in-out;
+    }
+
+    .pointer-arrow {
+      transition: all 0.5s ease-in-out;
+    }
+
+    .next-arrow {
+      transition: all 0.5s ease-in-out;
+      stroke-dasharray: 5, 5;
+    }
+
+    .code-line {
+      transition: background-color 0.3s ease-in-out;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .highlight-code {
+      background-color: #fef9c3;
+      /* yellow-100 */
+    }
+
+    .button {
+      transition: all 0.2s ease;
+    }
+
+    .button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+  <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Populating Next Right Pointers Visualizer</h1>
+      <p class="mt-2 text-lg text-gray-600">Understanding the O(1) space solution for connecting nodes at the same
+        level.</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <!-- Visualization Area -->
+      <div class="lg:col-span-3 bg-white p-4 rounded-xl shadow-lg border border-gray-200">
+        <svg id="visualizer" class="w-full h-auto" viewBox="0 0 800 500"></svg>
+      </div>
+
+      <!-- Controls and Explanation -->
+      <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg border border-gray-200 flex flex-col">
+        <div>
+          <h2 class="text-xl font-semibold mb-3 border-b pb-2">Controls</h2>
+          <div class="flex space-x-3 mb-6">
+            <button id="reset-btn"
+              class="button w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Reset</button>
+            <button id="prev-btn"
+              class="button w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg">Previous</button>
+            <button id="next-btn"
+              class="button w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Next
+              Step</button>
+          </div>
+        </div>
+
+        <div class="flex-grow">
+          <h2 class="text-xl font-semibold mb-3 border-b pb-2">Explanation</h2>
+          <div id="explanation-box" class="bg-gray-100 p-4 rounded-lg text-gray-700 h-32 overflow-y-auto">
+            Welcome! Click "Next Step" to begin the visualization.
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <h2 class="text-xl font-semibold mb-3 border-b pb-2">Code</h2>
+          <pre class="bg-gray-800 text-white p-4 rounded-lg text-sm overflow-x-auto"><code id="code-block">
+while (root != null) {
+    if (root.left != null) {
+        t.next = root.left;
+        t = t.next;
+    }
+    if (root.right != null) {
+        t.next = root.right;
+        t = t.next;
+    }
+    root = root.next;
+    if (root == null) {
+        root = d.next;
+        d.next = null;
+        t = d;
+    }
+}
+                     </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- DATA STRUCTURES ---
+    class Node {
+      constructor(val, x, y) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+        this.next = null;
+        this.x = x; // position for drawing
+        this.y = y; // position for drawing
+        this.id = `node-${val}`;
+      }
+    }
+
+    // --- INITIALIZATION ---
+    const svg = document.getElementById('visualizer');
+    const explanationBox = document.getElementById('explanation-box');
+    const codeLines = document.getElementById('code-block').children;
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+    const NODE_RADIUS = 20;
+    let scenario = [];
+    let currentStep = -1;
+
+    // --- SVG HELPER FUNCTIONS ---
+    function createCircle(node) {
+      const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('id', node.id);
+      circle.setAttribute('cx', node.x);
+      circle.setAttribute('cy', node.y);
+      circle.setAttribute('r', NODE_RADIUS);
+      circle.setAttribute('stroke', '#374151'); // gray-700
+      circle.setAttribute('stroke-width', 2);
+      circle.setAttribute('fill', '#f9fafb'); // gray-50
+      circle.classList.add('node-circle');
+
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('id', `${node.id}-text`);
+      text.setAttribute('x', node.x);
+      text.setAttribute('y', node.y + 5);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-size', '16');
+      text.setAttribute('fill', '#1f2937'); // gray-800
+      text.classList.add('node-text');
+      text.textContent = node.val;
+
+      group.appendChild(circle);
+      group.appendChild(text);
+      return group;
+    }
+
+    function createLine(fromNode, toNode) {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', fromNode.x);
+      line.setAttribute('y1', fromNode.y + NODE_RADIUS);
+      line.setAttribute('x2', toNode.x);
+      line.setAttribute('y2', toNode.y - NODE_RADIUS);
+      line.setAttribute('stroke', '#6b7280'); // gray-500
+      line.setAttribute('stroke-width', 2);
+      return line;
+    }
+
+    function createNextArrow(fromNode, toNode, color) {
+      const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const startX = fromNode.x + NODE_RADIUS;
+      const startY = fromNode.y;
+      const endX = toNode.x - NODE_RADIUS;
+      const endY = toNode.y;
+      const midX = (startX + endX) / 2;
+      const d = `M ${startX} ${startY} C ${midX} ${startY - 20}, ${midX} ${endY - 20}, ${endX} ${endY}`;
+
+      path.setAttribute('d', d);
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width', 2);
+      path.setAttribute('fill', 'none');
+      path.classList.add('next-arrow');
+
+      const arrowHead = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      arrowHead.setAttribute('points', `${endX},${endY} ${endX - 10},${endY - 5} ${endX - 10},${endY + 5}`);
+      arrowHead.setAttribute('fill', color);
+
+      group.appendChild(path);
+      group.appendChild(arrowHead);
+      return group;
+    }
+
+    function createPointer(name, targetNode, color, yOffset) {
+      if (!targetNode) return document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+      const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      const x = targetNode.x;
+      const y = targetNode.y + NODE_RADIUS + 20 + yOffset;
+
+      text.setAttribute('x', x);
+      text.setAttribute('y', y);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-weight', 'bold');
+      text.setAttribute('fill', color);
+      text.textContent = name;
+
+      const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      arrow.setAttribute('d', `M ${x} ${y - 10} L ${x} ${targetNode.y + NODE_RADIUS + 5}`);
+      arrow.setAttribute('stroke', color);
+      arrow.setAttribute('stroke-width', 2);
+      arrow.setAttribute('fill', 'none');
+      arrow.setAttribute('marker-end', 'url(#arrowhead-' + color.replace('#', '') + ')');
+
+      group.appendChild(text);
+      group.appendChild(arrow);
+      group.classList.add('pointer-arrow');
+      return group;
+    }
+
+    function createArrowHeadMarker(id, color) {
+      const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+      marker.setAttribute('id', id);
+      marker.setAttribute('viewBox', '0 0 10 10');
+      marker.setAttribute('refX', '8');
+      marker.setAttribute('refY', '5');
+      marker.setAttribute('markerWidth', '6');
+      marker.setAttribute('markerHeight', '6');
+      marker.setAttribute('orient', 'auto-start-reverse');
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z');
+      path.setAttribute('fill', color);
+      marker.appendChild(path);
+      return marker;
+    }
+
+    // --- ALGORITHM VISUALIZATION LOGIC ---
+
+    function buildScenario() {
+      // Recreate tree for simulation
+      let head = new Node(1, 400, 50);
+      head.left = new Node(2, 250, 150);
+      head.right = new Node(3, 550, 150);
+      head.left.left = new Node(4, 150, 250);
+      head.left.right = new Node(5, 350, 250);
+      head.right.left = new Node(6, 450, 250);
+      head.right.right = new Node(7, 650, 250);
+
+      let dummy = new Node(-1, 50, 400);
+
+      // Initial state
+      let root = head;
+      let d = dummy;
+      let t = d;
+      let nextPointers = [];
+
+      function captureState(explanation, lineIndex) {
+        scenario.push({
+          rootId: root ? root.id : null,
+          tId: t ? t.id : null,
+          dNextId: d.next ? d.next.id : null,
+          nextPointers: JSON.parse(JSON.stringify(nextPointers)),
+          explanation: explanation,
+          lineIndex: lineIndex
+        });
+      }
+
+      captureState("Initial state. `root` points to the head of the tree. A dummy node `d` is created, and a tail pointer `t` is set to `d`.", -1);
+
+      while (root != null) {
+        captureState("Loop condition `root != null` is true. Start traversing the current level.", 0);
+
+        if (root.left != null) {
+          captureState("`root.left` exists. It's node " + root.left.val + ".", 1);
+          t.next = root.left;
+          nextPointers.push({ from: t.id, to: t.next.id });
+          captureState("Set `t.next` to `root.left`. The new level starts to form.", 2);
+          t = t.next;
+          captureState("Move `t` to the new end of the list.", 3);
+        }
+
+        if (root.right != null) {
+          captureState("`root.right` exists. It's node " + root.right.val + ".", 5);
+          t.next = root.right;
+          nextPointers.push({ from: t.id, to: t.next.id });
+          captureState("Set `t.next` to `root.right`, linking it to the previous node in this level.", 6);
+          t = t.next;
+          captureState("Move `t` to the new end of the list.", 7);
+        }
+
+        captureState("Prepare to move to the next node in the current level.", 8);
+        root = root.next;
+        captureState(root ? `Moved \`root\` to the next node in its level (node ${root.val}).` : "End of the current level. `root` is now null.", 8);
+
+        if (root == null) {
+          captureState("`root` is null, which means we've finished traversing the current level.", 9);
+          root = d.next;
+          captureState(root ? `Move to the next level. Set \`root\` to the start of the list we just created (node ${root.val}).` : "The last level had no children, so `d.next` is null. `root` is now null.", 10);
+          d.next = null;
+          captureState("Reset the dummy node's `next` pointer for the next iteration.", 11);
+          t = d;
+          captureState("Reset `t` back to the dummy node `d`.", 12);
+        }
+      }
+      captureState("Loop condition `root != null` is false. The algorithm is complete.", 0);
+      captureState("Final state. All nodes are connected.", -1);
+    }
+
+    function drawScene(step) {
+      if (step < 0 || step >= scenario.length) return;
+
+      const state = scenario[step];
+      svg.innerHTML = ''; // Clear SVG
+
+      // Create markers
+      const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      defs.appendChild(createArrowHeadMarker('arrowhead-1d4ed8', '#1d4ed8')); // blue
+      defs.appendChild(createArrowHeadMarker('arrowhead-be123c', '#be123c')); // red
+      svg.appendChild(defs);
+
+      // --- Draw Tree Structure ---
+      let tree = new Node(1, 400, 50);
+      tree.left = new Node(2, 250, 150);
+      tree.right = new Node(3, 550, 150);
+      tree.left.left = new Node(4, 150, 250);
+      tree.left.right = new Node(5, 350, 250);
+      tree.right.left = new Node(6, 450, 250);
+      tree.right.right = new Node(7, 650, 250);
+      const allNodes = [tree, tree.left, tree.right, tree.left.left, tree.left.right, tree.right.left, tree.right.right];
+
+      let dummyNode = new Node('d', 50, 400);
+      allNodes.push(dummyNode);
+
+      const nodeMap = allNodes.reduce((map, node) => {
+        map[node.id] = node;
+        return map;
+      }, {});
+
+      // Draw child lines
+      allNodes.forEach(node => {
+        if (node.left) svg.appendChild(createLine(node, node.left));
+        if (node.right) svg.appendChild(createLine(node, node.right));
+      });
+
+      // Draw `next` pointers established so far
+      state.nextPointers.forEach(ptr => {
+        const fromNode = nodeMap[ptr.from];
+        const toNode = nodeMap[ptr.to];
+        if (fromNode && toNode) {
+          const color = fromNode.y === toNode.y ? '#059669' : '#ca8a04'; // green or yellow
+          svg.appendChild(createNextArrow(fromNode, toNode, color));
+        }
+      });
+
+      // Draw dummy's next pointer
+      if (state.dNextId) {
+        const toNode = nodeMap[state.dNextId];
+        if (toNode) {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', dummyNode.x + NODE_RADIUS);
+          line.setAttribute('y1', dummyNode.y);
+          line.setAttribute('x2', toNode.x - NODE_RADIUS);
+          line.setAttribute('y2', toNode.y);
+          line.setAttribute('stroke', '#ca8a04');
+          line.setAttribute('stroke-width', 2);
+          line.classList.add('next-arrow');
+          svg.appendChild(line);
+        }
+      }
+
+
+      // Draw nodes
+      allNodes.forEach(node => svg.appendChild(createCircle(node)));
+
+      // Highlight and draw pointers
+      const rootNode = state.rootId ? nodeMap[state.rootId] : null;
+      const tNode = state.tId ? nodeMap[state.tId] : null;
+
+      if (rootNode) {
+        document.getElementById(rootNode.id).setAttribute('fill', '#dbeafe'); // blue-100
+        svg.appendChild(createPointer('root', rootNode, '#1d4ed8', 0));
+      }
+      if (tNode) {
+        document.getElementById(tNode.id).setAttribute('fill', '#fee2e2'); // red-100
+        svg.appendChild(createPointer('t', tNode, '#be123c', 25));
+      }
+
+      // Update explanation and code highlight
+      explanationBox.textContent = state.explanation;
+      explanationBox.scrollTop = 0;
+
+      const codeBlock = document.getElementById('code-block');
+      Array.from(codeBlock.getElementsByTagName('div')).forEach(line => {
+        line.classList.remove('highlight-code');
+      });
+      if (state.lineIndex >= 0) {
+        const lineToHighlight = codeBlock.querySelector(`div:nth-child(${state.lineIndex + 1})`);
+        if (lineToHighlight) {
+          lineToHighlight.classList.add('highlight-code');
+        }
+      }
+
+      // Update button states
+      prevBtn.disabled = currentStep <= 0;
+      nextBtn.disabled = currentStep >= scenario.length - 1;
+    }
+
+    function setup() {
+      // Wrap code lines in divs for highlighting
+      const codeBlock = document.getElementById('code-block');
+      const lines = codeBlock.innerHTML.split('\n').filter(line => line.trim().length > 0);
+      codeBlock.innerHTML = lines.map(line => `<div class="code-line">${line}</div>`).join('');
+
+      scenario = [];
+      currentStep = -1;
+      buildScenario();
+      nextStep();
+    }
+
+    function nextStep() {
+      if (currentStep < scenario.length - 1) {
+        currentStep++;
+        drawScene(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        drawScene(currentStep);
+      }
+    }
+
+    // --- EVENT LISTENERS ---
+    nextBtn.addEventListener('click', nextStep);
+    prevBtn.addEventListener('click', prevStep);
+    resetBtn.addEventListener('click', setup);
+
+    // --- START ---
+    window.onload = setup;
+
+  </script>
+</body>
+
+</html>

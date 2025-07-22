@@ -2,6 +2,8 @@ package linkedlist;
 
 import java.util.ArrayList;
 
+import helper.ListNode;
+
 public class All {
     public static void main(String[] args) {
         int[] A = new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };

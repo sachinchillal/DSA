@@ -9,32 +9,32 @@ import java.util.Stack;
 import helper.TestCaseArray;
 
 public class LevelOrderTraversal {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] {}, new int[][] {}),
+      new TestCaseArray(new int[] { 1 }, new int[][] { { 1 } }),
+      new TestCaseArray(new int[] { 1, 2 }, new int[][] { { 1 }, { 2 } }),
+      new TestCaseArray(new int[] { 1, 2, 3 }, new int[][] { { 1 }, { 2, 3 } }),
+      new TestCaseArray(new int[] { 1, 2, 3, 4 }, new int[][] { { 1 }, { 2, 3 }, { 4 } }),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5 } }),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6 } }),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6, 7 } }),
+      new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6, 7 }, { 8 } }),
+
+      // Might not expect the output in 1-D array so commenting it out
+      // new TestCaseArray(new int[] {}, new int[] {}),
+      // new TestCaseArray(new int[] { 1 }, new int[] { 1 }),
+      // new TestCaseArray(new int[] { 1, 2 }, new int[] { 1, 2 }),
+      // new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 }),
+      // new TestCaseArray(new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4 }),
+      // new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }),
+      // new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 2, 3, 4, 5,
+      // 6 }),
+      // new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, new int[] { 1, 2, 3, 4,
+      // 5, 6, 7 })
+  };
 
   public static void main(String[] args) {
     System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] {}, new int[][] {}),
-        new TestCaseArray(new int[] { 1 }, new int[][] { { 1 } }),
-        new TestCaseArray(new int[] { 1, 2 }, new int[][] { { 1 }, { 2 } }),
-        new TestCaseArray(new int[] { 1, 2, 3 }, new int[][] { { 1 }, { 2, 3 } }),
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, new int[][] { { 1 }, { 2, 3 }, { 4 } }),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5 } }),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6 } }),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6, 7 } }),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7, 8 }, new int[][] { { 1 }, { 2, 3 }, { 4, 5, 6, 7 }, { 8 } }),
-
-        // Might not expect the output in 1-D array so commenting it out
-        // new TestCaseArray(new int[] {}, new int[] {}),
-        // new TestCaseArray(new int[] { 1 }, new int[] { 1 }),
-        // new TestCaseArray(new int[] { 1, 2 }, new int[] { 1, 2 }),
-        // new TestCaseArray(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 }),
-        // new TestCaseArray(new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4 }),
-        // new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }),
-        // new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6 }, new int[] { 1, 2, 3, 4, 5,
-        // 6 }),
-        // new TestCaseArray(new int[] { 1, 2, 3, 4, 5, 6, 7 }, new int[] { 1, 2, 3, 4,
-        // 5, 6, 7 })
-    };
 
     int count = 1;
     for (TestCaseArray testCase : TestCases) {

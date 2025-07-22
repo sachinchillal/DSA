@@ -74,14 +74,17 @@ public class Subsets {
   static void findAllSubsets(int[] A, int index, ArrayList<Integer> L, ArrayList<ArrayList<Integer>> R) {
     if (index == A.length) {
       R.add(new ArrayList<>(L));
+      System.out.println(R + " , " + index);
       return;
     }
     // Include the current element
     L.add(A[index]);
     findAllSubsets(A, index + 1, L, R);
+    // System.out.println(R + " | " + index);
     // Exclude the current element
     L.remove(L.size() - 1);
     findAllSubsets(A, index + 1, L, R);
+    System.out.println(R + " > " + index);
   }
 
   /**

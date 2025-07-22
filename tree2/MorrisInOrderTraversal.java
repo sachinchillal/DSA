@@ -1,12 +1,13 @@
-package tree;
+package tree2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Stack;
 
 import helper.TestCaseArray;
+import tree.Tree;
+import tree.TreeNode;
 
-public class InOrderTraversal {
+public class MorrisInOrderTraversal {
   static TestCaseArray[] TestCases = {
       new TestCaseArray(new int[] {}, new int[] {}),
       new TestCaseArray(new int[] { 1 }, new int[] { 1 }),
@@ -25,7 +26,7 @@ public class InOrderTraversal {
     for (TestCaseArray testCase : TestCases) {
       int[] expected = testCase.R_Array;
       TreeNode root = Tree.arrayToTree(testCase.A);
-      int[] result = inOrderTraversal(root);
+      int[] result = morrisInOrderTraversal(root);
 
       if (Arrays.equals(result, expected)) {
         System.out.println(count + " Test case Passed!");
@@ -37,44 +38,42 @@ public class InOrderTraversal {
     }
   }
 
-  /*
-   * In meaning Node value comes middle/in between
-   * Right always comes after left, L R
-   * L N R
-   */
-  public static int[] inOrderTraversal(TreeNode root) {
+  public static int[] morrisInOrderTraversal(TreeNode root) {
     ArrayList<Integer> R = new ArrayList<>();
-    inOrderIterative(root, R);
-    // inOrderRecursive(root, R);
+    morrisInOrderTraversal(root, R);
     return R.stream().mapToInt(e -> e).toArray();
   }
 
-  /*
-   * Using Recursion
-   * Limitation: Might not work when data is Huge
-   * Might give Maximum call stack exceeded or Call Stack overflow
-   * Best approach is to use Iterative
-   */
-  public static void inOrderRecursive(TreeNode n, ArrayList<Integer> R) {
-    if (n == null) {
-      return;
+  static void morrisInOrderTraversal(TreeNode root, ArrayList<Integer> R) {
+    TreeNode n = root;
+    while (n != null) {
+      print("N: " + n.val);
+      if (n.left == null) {
+        R.add(n.val);
+        print("R: " + R);
+        n = n.right;
+      } else {
+        TreeNode pre = n.left; // one step left and then right, right, right
+        while (pre.right != null && pre.right != n) {
+          pre = pre.right;
+        }
+
+        if (pre.right == null) {
+          pre.right = n;
+          print("N: " + pre.val + " R: " + n.val);
+          n = n.left;
+        } else {
+          pre.right = null;
+          R.add(n.val);
+          print("--->" + R);
+          n = n.right;
+        }
+      }
     }
-    inOrderRecursive(n.left, R);
-    R.add(n.val);
-    inOrderRecursive(n.right, R);
   }
 
-  public static void inOrderIterative(TreeNode root, ArrayList<Integer> R) {
-    Stack<TreeNode> s = new Stack<>();
-    TreeNode current = root;
-    while (current != null || s.size() > 0) {
-      while (current != null) {
-        s.push(current);
-        current = current.left;
-      }
-      current = s.pop();
-      R.add(current.val);
-      current = current.right;
-    }
+  static void print(Object x) {
+    // System.out.println(x);
   }
+
 }

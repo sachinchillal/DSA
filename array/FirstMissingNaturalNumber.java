@@ -12,21 +12,22 @@ class CustomUtil {
 }
 
 public class FirstMissingNaturalNumber {
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(new int[] { 1 }, 2),
+      new TestCaseArray(new int[] { 2 }, 1),
+      new TestCaseArray(new int[] { 3 }, 1),
+      new TestCaseArray(new int[] { -5 }, 1),
+      new TestCaseArray(new int[] { 1, 2 }, 3),
+      new TestCaseArray(new int[] { 2, 3 }, 1),
+      new TestCaseArray(new int[] { 1, 3 }, 2),
+      new TestCaseArray(new int[] { 2, 3, 1, 2 }, 4),
+      new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 4),
+      new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 4),
+      new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
+  };
+
   public static void main(String[] args) {
-    System.err.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] { 1 }, 2),
-        new TestCaseArray(new int[] { 2 }, 1),
-        new TestCaseArray(new int[] { 3 }, 1),
-        new TestCaseArray(new int[] { -5 }, 1),
-        new TestCaseArray(new int[] { 1, 2 }, 3),
-        new TestCaseArray(new int[] { 2, 3 }, 1),
-        new TestCaseArray(new int[] { 1, 3 }, 2),
-        new TestCaseArray(new int[] { 2, 3, 1, 2 }, 4),
-        new TestCaseArray(new int[] { 2, 3, 1, 5, 6 }, 4),
-        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 2 }, 4),
-        new TestCaseArray(new int[] { 1, 5, 6, 7, 3, 8, 9, 10, 2 }, 4),
-    };
+    System.out.println();
     int count = 1;
     for (TestCaseArray testCase : TestCases) {
       int[] A = testCase.A;
