@@ -81,15 +81,15 @@ public class TestCaseArray {
     this.R_Array = R_Array;
   }
 
-  public TestCaseArray(int N, int[] R) {
+  public TestCaseArray(int N, int[] R_Array) {
     this.N = N;
-    this.R_Array = R;
+    this.R_Array = R_Array;
   }
 
-  public TestCaseArray(int N, int[] B, int[] R) {
+  public TestCaseArray(int N, int[] B, int[] R_Array) {
     this.N = N;
     this.B = B;
-    this.R_Array = R;
+    this.R_Array = R_Array;
   }
 
   public TestCaseArray(int[] A, int N, Boolean Rb) {

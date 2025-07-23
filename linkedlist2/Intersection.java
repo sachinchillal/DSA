@@ -64,6 +64,28 @@ public class Intersection {
     return pA;
   }
 
+  ListNode getIntersectionNode2(ListNode L1, ListNode L2) {
+    if (L1 == null || L2 == null) {
+      return null;
+    }
+
+    ListNode x = L1;
+    ListNode y = L2;
+    while (x != y) {
+      if (x == null) {
+        x = L2; // Redirect to L2 if reached the end of L1
+      } else {
+        x = x.next; // Move to the next node in L1
+      }
+      if (y == null) {
+        y = L1; // Redirect to L1 if reached the end of L2
+      } else {
+        y = y.next; // Move to the next node in L2
+      }
+    }
+    return x; // This will be the intersection node or null if no intersection
+  }
+
   // Main method to test the solution
   public static void main(String[] args) {
     // Create the linked lists from the example:
@@ -92,7 +114,8 @@ public class Intersection {
     b3.next = c1; // Intersection point
 
     Intersection solution = new Intersection();
-    ListNode intersectionNode = solution.getIntersectionNode(a1, b1);
+    // ListNode intersectionNode = solution.getIntersectionNode(a1, b1);
+    ListNode intersectionNode = solution.getIntersectionNode2(a1, b1);
 
     if (intersectionNode != null) {
       System.out.println("Intersection found at node with value: " + intersectionNode.val);
@@ -108,7 +131,7 @@ public class Intersection {
     ListNode list2 = new ListNode(1);
     list2.next = new ListNode(5);
 
-    ListNode noIntersectionNode = solution.getIntersectionNode(list1, list2);
+    ListNode noIntersectionNode = solution.getIntersectionNode2(list1, list2);
 
     if (noIntersectionNode != null) {
       System.out.println("Intersection found at node with value: " + noIntersectionNode.val);

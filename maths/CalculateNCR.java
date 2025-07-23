@@ -107,6 +107,15 @@ public class CalculateNCR {
     return R;
   }
 
+  /**
+   * Time Complexity: O(N * R)
+   * Space Complexity: O(N * R)
+   * 
+   * @param N
+   * @param R
+   * @param m
+   * @return
+   */
   static int calculateNCR(int N, int R, int m) {
     if (N > R) {
       R = Math.min(R, N - R); // nCr = nC(n-r)
@@ -116,7 +125,7 @@ public class CalculateNCR {
     for (int i = 0; i <= N; i++) {
       for (int j = 0; j <= Math.min(i, R); j++) {
         if (j == i || j == 0) {
-          C[i][j] = 1;
+          C[i][j] = 1; // Base case: nC0 = 1 and nCn = 1
         } else {
           // Formula or Property nCr = (n - 1)C(r - 1) + (n - 1)Cr
           C[i][j] = (C[i - 1][j - 1] % m + C[i - 1][j] % m) % m;

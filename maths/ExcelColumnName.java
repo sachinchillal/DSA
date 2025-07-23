@@ -57,6 +57,7 @@ public class ExcelColumnName {
     }
     StringBuilder S = new StringBuilder();
     while (n > 0) {
+      // -1 is because A=1, B=2, ..., Z=26 and we already taken one character A
       int r = (n - 1) % 26;
       S.insert(0, (char) ('A' + r));
       n = (n - 1) / 26;

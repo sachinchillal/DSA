@@ -1,3 +1,5 @@
+package two_pointers;
+
 import helper.TestCaseArray;
 
 public class SubarrayWithSumExists {
@@ -39,10 +41,9 @@ public class SubarrayWithSumExists {
   }
 
   static boolean isSubarrayExistWithSumK(int[] A, int K) {
-    boolean R = false;
     int n = A.length;
     if (n == 0) {
-      return R;
+      return false;
     }
     int i = 0;
     int j = 0;
@@ -70,7 +71,7 @@ public class SubarrayWithSumExists {
         }
       }
     }
-    return R;
+    return false;
   }
 
 }

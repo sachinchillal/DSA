@@ -57,6 +57,22 @@ public class PascalTriangle {
     return C;
   }
 
+  static int[][] pascalTriangle2(int n) {
+    if (n < 0) {
+      return new int[][] {};
+    }
+    int[][] R = new int[n + 1][n + 1];
+    R[0][0] = 1;
+    for (int i = 0; i <= n; i++) {
+      R[i][0] = 1; // first and last values are 1
+      R[i][i] = 1;
+      for (int j = 1; j < i; j++) {
+        R[i][j] = R[i - 1][j] + R[i - 1][j - 1];
+      }
+    }
+    return R;
+  }
+
   static void printArray(int i, int j, int[][] A) {
     System.out.println("(" + i + ", " + j + ")");
     for (int k = 0; k < A.length; k++) {

@@ -25,11 +25,11 @@ public class RankOfString {
     for (TestCaseArray testCase : TestCases) {
       int expected = testCase.R;
       int result = (int) findRank(testCase.S);
-      if ((result == expected)) {
+      if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {
         System.out.println(count + " Test case failed!");
-        System.out.println("Expected: " + (expected) + ", Result: " + (result) + "\n");
+        System.out.println("Expected: " + expected + ", Result: " + result + "\n");
       }
       count++;
     }
@@ -94,6 +94,9 @@ public class RankOfString {
       }
 
       // Calculate permutations of remaining characters
+      // n = number of chars to take
+      // -1 = current char already taken, to exclude current char
+      // -i = to exclude chars before current index
       long remainingPermutations = factorial(n - 1 - i);
 
       // Add the contribution of the current character to the rank

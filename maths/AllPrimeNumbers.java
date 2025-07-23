@@ -1,5 +1,6 @@
 package maths;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import helper.TestCaseArray;
@@ -37,6 +38,12 @@ public class AllPrimeNumbers {
     }
   }
 
+  /**
+   * All prime numbers from 1 to N using Sieve of Eratosthenes algorithm.
+   * 
+   * @param N
+   * @return
+   */
   public static int[] findAllPrimeNumbers(int N) {
     int[] R = new int[N];
     boolean[] isPrime = new boolean[N + 1];
@@ -83,6 +90,30 @@ public class AllPrimeNumbers {
     }
 
     return Arrays.copyOf(R, index);
+  }
+
+  public static int[] findAllPrimeNumbers3(int n) {
+    if (n < 2) {
+      return new int[] {};
+    }
+    boolean[] isPrime = new boolean[n + 1];
+    isPrime[0] = isPrime[1] = true; // 0 and 1 are not prime
+    for (int i = 2; i * i <= n; i++) {
+      if (!isPrime[i]) {
+        for (int j = i * i; j <= n; j += i) {
+          isPrime[j] = true;
+          // printArray(i, j, isPrime); // for tracing the sieve process
+        }
+      }
+    }
+    ArrayList<Integer> R = new ArrayList<>();
+    for (int i = 2; i <= n; i++) {
+      if (!isPrime[i]) {
+        R.add(i);
+      }
+    }
+
+    return R.stream().mapToInt(i -> i).toArray();
   }
 
   static void printArray(int i, int j, boolean[] A) {
