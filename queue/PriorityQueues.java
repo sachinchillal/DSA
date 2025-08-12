@@ -1,71 +1,60 @@
 package queue;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.PriorityQueue;
-
-import helper.TestCaseArray;
 
 public class PriorityQueues {
 
   public static void main(String[] args) {
-    System.out.println();
-    TestCaseArray[] TestCases = {
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, 1, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4 }, 2, true),
-        new TestCaseArray(new int[] { 1, 2, 3, 4, 5 }, 5, true),
-        new TestCaseArray(new int[] { 8, 8, 10 }, 20, false),
-    };
+    System.out.println("Ascending Priority Queue:");
+    // ascendingPriorityQueue();
 
-    int count = 1;
-    for (TestCaseArray testCase : TestCases) {
-      boolean expected = testCase.Rb;
-      boolean result = canFormPerfectLine(testCase.A, testCase.N);
-      if (result == expected) {
-        System.out.println(count + " Test case Passed!");
-      } else {
-        System.out.println(count + " Test case failed!");
-        System.out.println("Expected: " + (expected) + ", Result: " + (result) + "\n");
-      }
-      count++;
-    }
+    System.out.println("\nDescending Priority Queue:");
+    descendingPriorityQueue();
   }
 
-  public static boolean canFormPerfectLine(int[] A, int B) {
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-    HashSet<Integer> uniqueSizes = new HashSet<>();
+  static void ascendingPriorityQueue() {
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    System.out.println(pq);
+    pq.add(5);
+    pq.add(1);
+    pq.add(3);
+    System.out.println(pq);
+    pq.add(4);
+    pq.add(2);
+    System.out.println(pq);
+    System.out.println("Peek: " + pq.peek());
+    System.out.println("Poll: " + pq.poll());
+    System.out.println("Remove: " + pq.remove());
+    System.out.println("After Poll: " + pq);
+    pq.add(6);
+    pq.add(7);
+    pq.add(1);
+    System.out.println(pq);
+    pq.remove(7);
+    System.out.println(pq);
+  }
 
-    // Add all items to the max heap
-    for (int num : A) {
-      maxHeap.add(num);
-    }
-
-    while (!maxHeap.isEmpty() && uniqueSizes.size() < B) {
-      int current = maxHeap.poll();
-
-      // Skip if already in the set
-      if (uniqueSizes.contains(current)) {
-        continue;
-      }
-
-      uniqueSizes.add(current);
-
-      // If we reached B unique sizes, return true
-      if (uniqueSizes.size() == B) {
-        return true;
-      }
-
-      // Break the item if it's greater than 1
-      if (current > 1) {
-        int part1 = current / 2;
-        int part2 = current - part1;
-
-        maxHeap.add(part1);
-        maxHeap.add(part2);
-      }
-    }
-
-    return uniqueSizes.size() == B;
+  static void descendingPriorityQueue() {
+    PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+    System.out.println(pq);
+    pq.add(5);
+    pq.add(1);
+    pq.add(3);
+    System.out.println(pq);
+    pq.add(4);
+    pq.add(2);
+    System.out.println(pq);
+    System.out.println("Peek: " + pq.peek());
+    System.out.println("Poll: " + pq.poll());
+    System.out.println("Remove: " + pq.remove());
+    System.out.println("After Poll: " + pq);
+    pq.add(6);
+    pq.add(7);
+    pq.add(1);
+    System.out.println(pq);
+    pq.remove(2);
+    System.out.println(pq);
   }
 
 }
