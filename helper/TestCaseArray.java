@@ -17,6 +17,7 @@ public class TestCaseArray {
   public int Ci;
 
   public String S;
+  public String S2;
 
   public String[] Rs_Array;
   public int[] R_Array; // Result
@@ -31,6 +32,12 @@ public class TestCaseArray {
   }
 
   public TestCaseArray(int N, int R) {
+    this.N = N;
+    this.R = R;
+  }
+
+  public TestCaseArray(int M, int N, int R) {
+    this.M = M;
     this.N = N;
     this.R = R;
   }
@@ -176,6 +183,12 @@ public class TestCaseArray {
   public TestCaseArray(String S, int R) {
     this.S = S;
     this.R = R;
+  }
+
+  public TestCaseArray(String S, String S2, String Rs) {
+    this.S = S;
+    this.S2 = S2;
+    this.Rs = Rs;
   }
 
   public TestCaseArray(int N, String Rs) {

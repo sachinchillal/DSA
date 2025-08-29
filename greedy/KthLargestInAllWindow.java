@@ -15,6 +15,12 @@ public class KthLargestInAllWindow {
         minHeap.poll();
       }
       R[i] = minHeap.peek();
+      // OR Special Case
+      // if (minHeap.size() == K) {
+      // R[i] = minHeap.peek();
+      // } else {
+      // R[i] = -1;
+      // }
     }
 
     return R;
