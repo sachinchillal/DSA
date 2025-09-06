@@ -8,8 +8,11 @@ public class TestCaseArray {
   public int[][] Matrix; // 2D array
 
   public String[] As;
-  public int N;
+
+  public int L;
   public int M;
+  public int N;
+  public int O;
 
   public int[] B;
 
@@ -156,6 +159,14 @@ public class TestCaseArray {
 
   public TestCaseArray(int[][] A_2Array, int R) {
     this.A_2Array = A_2Array;
+    this.R = R;
+  }
+
+  public TestCaseArray(int[][] A_2Array, int L, int M, int N, int R) {
+    this.A_2Array = A_2Array;
+    this.L = L;
+    this.M = M;
+    this.N = N;
     this.R = R;
   }
 
