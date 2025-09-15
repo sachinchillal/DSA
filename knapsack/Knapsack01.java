@@ -3,6 +3,68 @@ package knapsack;
 import java.util.Arrays;
 
 public class Knapsack01 {
+
+  public static int knapsack01Tabulation(int[] P, int[] W, int C) {
+    int n = P.length;
+    int[][] dp = new int[n + 1][C + 1];
+
+    // Build the DP table in a bottom-up manner
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= C; j++) {
+        int pick = 0;
+
+        int k = i - 1;
+        int w = W[k];
+        // Pick ith item if it does not exceed the capacity of knapsack
+        if (w <= j)
+          pick = P[k] + dp[k][j - w];
+
+        // Don't pick the ith item
+        int notPick = dp[k][j];
+
+        // Store the maximum of picking and not picking the ith item
+        dp[i][j] = Math.max(pick, notPick);
+      }
+    }
+
+    // The maximum value that can be obtained with capacity C is in dp[n][C]
+    return dp[n][C];
+  }
+
+  /**
+   * 01 Knapsack Problem using Tabulation (Bottom-Up DP)
+   * Without using extra variable
+   * 
+   * @param P
+   * @param W
+   * @param C
+   * @return
+   */
+  public static int knapsack01Tabulation2(int[] P, int[] W, int C) {
+    int n = P.length;
+    int[][] dp = new int[n + 1][C + 1];
+
+    // Build the DP table in a bottom-up manner
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= C; j++) {
+        int pick = 0;
+
+        // Pick ith item if it does not exceed the capacity of knapsack
+        if (W[i - 1] <= j)
+          pick = P[i - 1] + dp[i - 1][j - W[i - 1]];
+
+        // Don't pick the ith item
+        int notPick = dp[i - 1][j];
+
+        // Store the maximum of picking and not picking the ith item
+        dp[i][j] = Math.max(pick, notPick);
+      }
+    }
+
+    // The maximum value that can be obtained with capacity C is in dp[n][C]
+    return dp[n][C];
+  }
+
   int knapsack01Property(int[] P, int[] W, int C) {
     int n = P.length;
     int[][] dp = new int[n + 1][C + 1];

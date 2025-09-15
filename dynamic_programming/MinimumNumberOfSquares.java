@@ -3,6 +3,30 @@ package dynamic_programming;
 import java.util.Arrays;
 
 public class MinimumNumberOfSquares {
+
+  /**
+   * Using Dynamic Programming Bottom-Up approach
+   * BIT - Bottom-Up / Iterative / Tabulation
+   * O(N * sqrt(N)) time complexity
+   * O(N) space complexity
+   * 
+   * @param n
+   * @return
+   */
+  public int minimumNumberOfSquaresIteration(int n) {
+    int[] dp = new int[n + 1];
+    dp[0] = 0;
+
+    for (int i = 1; i <= n; i++) {
+      dp[i] = i; // Maximum squares required is i (1*1 + 1*1 + ...)
+
+      for (int j = 1; j * j <= i; j++) {
+        dp[i] = Math.min(dp[i], 1 + dp[i - j * j]);
+      }
+    }
+    return dp[n];
+  }
+
   /**
    * Using Dynamic Programming Top-Down approach
    * 

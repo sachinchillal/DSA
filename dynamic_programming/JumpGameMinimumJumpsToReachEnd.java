@@ -3,7 +3,21 @@ package dynamic_programming;
 import java.util.Arrays;
 
 public class JumpGameMinimumJumpsToReachEnd {
+
   // Jump Game - Minimum Jumps to Reach End
+  // https://www.geeksforgeeks.org/dsa/minimum-number-jumps-reach-endset-2on-solution/
+  static int MinimumNumberOfJumpsToReachEndUsingGreedy(int[] A) {
+    int jumps = 0, currentEnd = 0, farthest = 0;
+    for (int i = 0; i < A.length - 1; i++) {
+      farthest = Math.max(farthest, i + A[i]);
+      if (i == currentEnd) {
+        jumps++;
+        currentEnd = farthest;
+      }
+    }
+    return jumps;
+  }
+
   // https://www.geeksforgeeks.org/dsa/minimum-number-of-jumps-to-reach-end-of-a-given-array/
   // Java program to find the minimum number of jumps to reach the end of the
   // array

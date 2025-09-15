@@ -129,8 +129,7 @@ public class RottenOranges {
 
           // if cell is in the matrix and
           // the orange is fresh
-          if (isSafe(x, y, n, m)
-              && mat[x][y] == 1) {
+          if (isSafe(x, y, n, m) && mat[x][y] == 1) {
             mat[x][y] = 2;
             q.add(new int[] { x, y });
           }

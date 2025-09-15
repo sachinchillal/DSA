@@ -1,5 +1,7 @@
 package knapsack;
 
+import java.util.Arrays;
+
 import helper.TestCaseArray;
 
 public class RodCutting {
@@ -30,6 +32,7 @@ public class RodCutting {
       int[] A = testCase.A;
       int expected = testCase.R;
       int result = maxProfitOnRodCutting(A);
+      // int result = rodCuttingUsingKnapsack01(A);
       if (result == expected) {
         System.out.println(count + " Test case Passed!");
       } else {
@@ -67,11 +70,78 @@ public class RodCutting {
         // The price of a piece of length 'j' is A[j-1].
         // The value of the remaining part of length 'i-j' is dp[i-j].
         maxVal = Math.max(maxVal, A[j - 1] + dp[i - j]);
+        // System.out.println(maxVal + " = max(" + maxVal + ", " + A[j - 1] + " + " +
+        // dp[i - j] + ")");
       }
       dp[i] = maxVal;
+      // System.out.println(Arrays.toString(dp));
     }
 
     return dp[N];
   }
 
+  /**
+   * My Own logic
+   * Cutting Rod is similar to Unbounded Knapsack 01?
+   * Capacity = A.length;
+   * Profits = A[]
+   * Weights = [1 to n]
+   * n = A.length
+   */
+  static int rodCuttingUsingKnapsack01(int[] A) {
+    int n = A.length;
+    int[] W = new int[n];
+    for (int i = 0; i < n; i++) {
+      W[i] = i + 1;
+    }
+    int C = n;
+    return UnboundedKnapsack.knapsackRepetitionAllowed(A, W, C);
+  }
+
+  static int rodCuttingUsingRecursion(int[] A) {
+    return rodCuttingRecursionHelper(A, A.length);
+  }
+
+  static int rodCuttingRecursionHelper(int[] A, int n) {
+    // Base Case
+    if (n <= 0)
+      return 0;
+
+    int maxVal = Integer.MIN_VALUE;
+
+    // Recursively cut the rod in different pieces and compare different
+    // configurations
+    for (int i = 0; i < n; i++) {
+      maxVal = Math.max(maxVal, A[i] + rodCuttingRecursionHelper(A, n - i - 1));
+    }
+    return maxVal;
+  }
+
+  static int rodCuttingUsingRecursionDP(int[] A) {
+    int n = A.length;
+    int[][] dp = new int[n + 1][n + 1];
+    for (int[] a : dp) {
+      Arrays.fill(a, -1);
+    }
+    return rodCuttingRecursionDPHelper(A, n, dp);
+  }
+
+  static int rodCuttingRecursionDPHelper(int[] A, int n, int[][] dp) {
+    // Base Case
+    if (n <= 0)
+      return 0;
+
+    // Check if we have already solved this subproblem
+    if (dp[n][n] != -1)
+      return dp[n][n];
+
+    int maxVal = Integer.MIN_VALUE;
+
+    // Recursively cut the rod in different pieces and compare different
+    // configurations
+    for (int i = 0; i < n; i++) {
+      maxVal = Math.max(maxVal, A[i] + rodCuttingRecursionDPHelper(A, n - i - 1, dp));
+    }
+    return dp[n][n] = maxVal;
+  }
 }

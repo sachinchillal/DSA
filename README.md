@@ -11,3 +11,8 @@ A collection of solutions to common Data Structures and Algorithms problems
 ```java
   return (int) ((profit * 1000.0) / 10.0);
 ```
+- Best way to apply modulo operation is to apply it at every step of addition or multiplication.
+```java
+int mod = (int) Math.pow(10, 6) + 15;
+result = (result + (someValue % mod)) % mod;
+```
