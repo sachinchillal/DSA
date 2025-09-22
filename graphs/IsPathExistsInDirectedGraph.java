@@ -82,4 +82,39 @@ public class IsPathExistsInDirectedGraph {
     return false;
   }
 
+  public boolean isPathReachable(int[][] edges, int n, int source, int destination) {
+    ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+    for (int i = 0; i <= n; i++) {
+      adj.add(new ArrayList<>());
+    }
+
+    for (int[] edge : edges) {
+      int u = edge[0];
+      int v = edge[1];
+      adj.get(u).add(v);
+    }
+
+    boolean[] visited = new boolean[n + 1];
+    return dfs(adj, visited, source, destination);
+  }
+
+  private boolean dfs(ArrayList<ArrayList<Integer>> adj, boolean[] visited, int node,
+      int destination) {
+
+    if (node == destination) {
+      return true;
+    }
+
+    visited[node] = true;
+
+    for (int neighbor : adj.get(node)) {
+      if (!visited[neighbor]) {
+        if (dfs(adj, visited, neighbor, destination)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 }

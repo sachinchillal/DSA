@@ -147,6 +147,12 @@ public class TestCaseArray {
     this.R_Array = R_Array;
   }
 
+  public TestCaseArray(int N, int[][] A_2Array, int[] R_Array) {
+    this.N = N;
+    this.A_2Array = A_2Array;
+    this.R_Array = R_Array;
+  }
+
   public TestCaseArray(int[][] A_2Array, int[][] R_2Array) {
     this.A_2Array = A_2Array;
     this.R_2Array = R_2Array;
@@ -160,6 +166,20 @@ public class TestCaseArray {
   public TestCaseArray(int[][] A_2Array, int R) {
     this.A_2Array = A_2Array;
     this.R = R;
+  }
+
+  public TestCaseArray(int[][] A_2Array, int L, int M, int R) {
+    this.A_2Array = A_2Array;
+    this.L = L;
+    this.M = M;
+    this.R = R;
+  }
+
+  public TestCaseArray(int[][] A_2Array, int L, int M, int[] R_Array) {
+    this.A_2Array = A_2Array;
+    this.L = L;
+    this.M = M;
+    this.R_Array = R_Array;
   }
 
   public TestCaseArray(int[][] A_2Array, int L, int M, int N, int R) {

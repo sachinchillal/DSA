@@ -1,9 +1,43 @@
 package graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
+import helper.TestCaseArray;
+
 public class TopologicalSort {
+
+  static TestCaseArray[] TestCases = {
+      new TestCaseArray(3, new int[][] { { 0, 1 }, { 1, 2 }, { 0, 2 } }, new int[] { 0, 1, 2 }),
+      new TestCaseArray(3, new int[][] { { 0, 1 }, { 1, 2 }, { 2, 0 } }, new int[] {}),
+      new TestCaseArray(4, new int[][] { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 3, 0 } }, new int[] {}),
+      new TestCaseArray(4, new int[][] { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 0, 3 } }, new int[] { 0, 1, 2, 3 }),
+
+      new TestCaseArray(4, new int[][] { { 0, 1 }, { 1, 2 }, { 2, 3 }, { 0, 3 }, { 0, 2 } }, new int[] { 0, 1, 2, 3 }),
+      new TestCaseArray(4, new int[][] { { 0, 1 }, { 1, 2 }, { 3, 2 }, { 3, 1 } }, new int[] { 0, 3, 1, 2 }),
+      new TestCaseArray(4, new int[][] { { 0, 3 }, { 0, 2 }, { 0, 1 } }, new int[] { 0, 1, 2, 3 }),
+      new TestCaseArray(5, new int[][] { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 2, 3 }, { 3, 4 } },
+          new int[] { 0, 1, 2, 3, 4 }),
+
+  };
+
+  public static void main(String[] args) {
+    System.out.println();
+    int count = 1;
+    for (TestCaseArray testCase : TestCases) {
+      int[] expected = testCase.R_Array;
+      int[] result = getTopologicalOrderOfDAG(testCase.N, testCase.A_2Array);
+      if (Arrays.equals(result, expected)) {
+        System.out.println(count + " Test case Passed!");
+      } else {
+        System.out.println(count + " Test case failed!");
+        System.out.println("Expected: " + Arrays.toString(expected) + ", Result: " + Arrays.toString(result) + "\n");
+      }
+      count++;
+    }
+  }
+
   /**
    * Solves the Topological Sort problem for a given directed graph.
    *
@@ -13,16 +47,16 @@ public class TopologicalSort {
    *         topological ordering of the graph. Returns an empty array if a cycle
    *         exists.
    */
-  public int[] getTopologicalOrderOfDAG(int N, int[][] M) {
+  static int[] getTopologicalOrderOfDAG(int N, int[][] M) {
     // Step 1: Initialize data structures.
     // Adjacency list to represent the graph.
     ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-    for (int i = 0; i <= N; i++) {
+    for (int i = 0; i < N; i++) {
       adj.add(new ArrayList<>());
     }
 
     // In-degree array to store the number of incoming edges for each node.
-    int[] inDegree = new int[N + 1];
+    int[] inDegree = new int[N];
 
     // Step 2: Build the graph and calculate in-degrees.
     // The problem uses 1-based indexing for nodes, so we use arrays of size N+1.
@@ -36,7 +70,7 @@ public class TopologicalSort {
     // Step 3: Find starting nodes with an in-degree of 0.
     // We use a min-priority queue to ensure the lexicographically smallest result.
     PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-    for (int i = 1; i <= N; i++) {
+    for (int i = 0; i < N; i++) {
       if (inDegree[i] == 0) {
         minHeap.add(i);
       }

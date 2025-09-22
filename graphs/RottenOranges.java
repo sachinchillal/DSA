@@ -62,7 +62,8 @@ public class RottenOranges {
           int newC = c + dc[j];
 
           // Check if the new position is within the grid bounds.
-          if (newR >= 0 && newR < rows && newC >= 0 && newC < cols) {
+          // if (newR >= 0 && newR < rows && newC >= 0 && newC < cols) {
+          if (isSafe(newR, newC, rows, cols)) {
             // Check if the adjacent cell contains a fresh orange.
             if (A[newR][newC] == 1) {
               // The fresh orange becomes rotten.
@@ -89,7 +90,69 @@ public class RottenOranges {
     return (i >= 0 && i < n && j >= 0 && j < m);
   }
 
-  static int orangesRotting(int[][] mat) {
+  static int orangesRotting(int[][] M) {
+    int n = M.length;
+    int m = M[0].length;
+
+    // all four directions
+    int[][] directions = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
+
+    // queue to store cell position
+    Queue<int[]> q = new LinkedList<>();
+
+    int freshOranges = 0;
+
+    // find all rotten oranges
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        if (M[i][j] == 2) {
+          q.add(new int[] { i, j });
+        } else if (M[i][j] == 1) {
+          freshOranges++;
+        }
+      }
+    }
+
+    // counter of elapsed time
+    int elapsedTime = 0;
+
+    while (!q.isEmpty()) {
+
+      // increase time by 1
+      elapsedTime++;
+
+      int size = q.size();
+      while (size > 0 && freshOranges > 0) {
+        int[] cur = q.poll();
+        int i = cur[0];
+        int j = cur[1];
+
+        // change 4-directionally connected cells
+        for (int[] dir : directions) {
+          int x = i + dir[0];
+          int y = j + dir[1];
+
+          // if cell is in the matrix and
+          // the orange is fresh
+          if (isSafe(x, y, n, m) && M[x][y] == 1) {
+            M[x][y] = 2;
+            freshOranges--;
+            q.add(new int[] { x, y });
+          }
+        }
+        size--;
+      }
+    }
+
+    // check if any fresh orange is remaining
+    if (freshOranges > 0) {
+      return -1;
+    }
+
+    return Math.max(0, elapsedTime - 1);
+  }
+
+  static int orangesRotting2(int[][] mat) {
     int n = mat.length;
     int m = mat[0].length;
 
@@ -116,8 +179,8 @@ public class RottenOranges {
       // increase time by 1
       elapsedTime++;
 
-      int len = q.size();
-      while (len-- > 0) {
+      int size = q.size();
+      while (size > 0) {
         int[] cur = q.poll();
         int i = cur[0];
         int j = cur[1];
@@ -134,6 +197,7 @@ public class RottenOranges {
             q.add(new int[] { x, y });
           }
         }
+        size--;
       }
     }
 

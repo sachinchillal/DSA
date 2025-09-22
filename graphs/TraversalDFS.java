@@ -3,6 +3,51 @@ package graphs;
 import java.util.*;
 
 public class TraversalDFS {
+  // Using Stack
+  int[] getDFSUsingStack(ArrayList<ArrayList<Integer>> M, int n) {
+    boolean[] visited = new boolean[n];
+    ArrayList<Integer> R = new ArrayList<>();
+    Stack<Integer> stack = new Stack<>();
+
+    stack.push(0); // starting from node 0 = source
+    visited[0] = true;
+
+    while (!stack.isEmpty()) {
+      int node = stack.pop();
+      R.add(node);
+
+      for (int e : M.get(node)) {
+        if (!visited[e]) {
+          stack.push(e);
+          visited[e] = true;
+        }
+      }
+    }
+
+    return R.stream().mapToInt(i -> i).toArray();
+  }
+
+  // Using Recursion
+  int[] getDFS(ArrayList<ArrayList<Integer>> M, int n) {
+    boolean[] visited = new boolean[n];
+    ArrayList<Integer> R = new ArrayList<>();
+
+    dfs(M, visited, 0, R);
+
+    return R.stream().mapToInt(i -> i).toArray();
+  }
+
+  void dfs(ArrayList<ArrayList<Integer>> M, boolean[] visited, int s, ArrayList<Integer> R) {
+    visited[s] = true;
+    R.add(s);
+
+    for (int i = 0; i < M.size(); i++) {
+      if (M.get(s).get(i) == 1 && !visited[i]) {
+        dfs(M, visited, i, R);
+      }
+    }
+  }
+
   // Function to add an edge to the adjacency list
   public static void addEdge(ArrayList<ArrayList<Integer>> adj, int s, int t) {
     adj.get(s).add(t);

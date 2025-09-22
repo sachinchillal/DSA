@@ -59,7 +59,7 @@ public class ShortestPathInDirectedAcyclicGraph12 {
     }
   }
 
-  public static int getShortestPathInDAG(int N, int[][] M, int S, int D) {
+  public static int getShortestPathInDAG2(int N, int[][] M, int S, int D) {
     // Build Vertex to Edges Map
     ArrayList<ArrayList<Edge>> adj = new ArrayList<>();
     for (int i = 0; i < N; i++) {
@@ -106,7 +106,19 @@ public class ShortestPathInDirectedAcyclicGraph12 {
     return dist[D];
   }
 
-  public int getShortestPathInDAG2(int N, int[][] M, int S, int D) {
+  /**
+   * Using only nested ArrayList
+   * Time Complexity: O(N + M)
+   * Space Complexity: O(N + M) for adjacency list + O(N) for distance array +
+   * O(N) for deque
+   * 
+   * @param N
+   * @param M
+   * @param S
+   * @param D
+   * @return
+   */
+  static int getShortestPathInDAG(int N, int[][] M, int S, int D) {
     // Create adjacency list
     ArrayList<ArrayList<int[]>> graph = new ArrayList<>();
     for (int i = 0; i < N; i++) {

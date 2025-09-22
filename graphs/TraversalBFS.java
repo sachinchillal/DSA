@@ -3,6 +3,31 @@ package graphs;
 import java.util.*;
 
 public class TraversalBFS {
+
+  // Using Queue
+  public static ArrayList<Integer> getBFSOfGraph(ArrayList<ArrayList<Integer>> adj, int s) {
+    boolean[] visited = new boolean[adj.size()];
+    ArrayList<Integer> R = new ArrayList<>();
+    Queue<Integer> queue = new LinkedList<>();
+
+    queue.add(s);
+    visited[s] = true;
+
+    while (!queue.isEmpty()) {
+      int node = queue.poll();
+      R.add(node);
+
+      for (int neighbor : adj.get(node)) {
+        if (!visited[neighbor]) {
+          queue.add(neighbor);
+          visited[neighbor] = true;
+        }
+      }
+    }
+
+    return R;
+  }
+
   // Function to add an edge to the adjacency list
   public static void addEdge(ArrayList<ArrayList<Integer>> adj, int s, int t) {
     adj.get(s).add(t);
@@ -32,29 +57,6 @@ public class TraversalBFS {
               visited[neighbor] = true;
             }
           }
-        }
-      }
-    }
-
-    return R;
-  }
-
-  public static ArrayList<Integer> getBFSOfGraph(ArrayList<ArrayList<Integer>> adj, int s) {
-    boolean[] visited = new boolean[adj.size()];
-    ArrayList<Integer> R = new ArrayList<>();
-    Queue<Integer> queue = new LinkedList<>();
-
-    queue.add(s);
-    visited[s] = true;
-
-    while (!queue.isEmpty()) {
-      int node = queue.poll();
-      R.add(node);
-
-      for (int neighbor : adj.get(node)) {
-        if (!visited[neighbor]) {
-          queue.add(neighbor);
-          visited[neighbor] = true;
         }
       }
     }

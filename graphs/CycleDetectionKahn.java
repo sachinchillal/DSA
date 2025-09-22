@@ -2,7 +2,6 @@ package graphs;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class CycleDetectionKahn {
@@ -20,26 +19,26 @@ public class CycleDetectionKahn {
    * - If we can process all nodes, it means there's no cycle.
    */
 
-  public boolean canFinish(int N, int[] C, int[] D) {
+  public boolean canFinish(int N, int[][] A) {
     // Create adjacency list and in-degree array
-    List<List<Integer>> adj = new ArrayList<>();
-    for (int i = 0; i <= N; i++) {
+    ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+    for (int i = 0; i < N; i++) {
       adj.add(new ArrayList<>());
     }
 
-    int[] inDegree = new int[N + 1];
+    int[] inDegree = new int[N];
 
     // Build the graph
-    for (int i = 0; i < D.length; i++) {
-      adj.get(D[i]).add(C[i]);
-      inDegree[C[i]]++;
+    for (int i = 0; i < A.length; i++) {
+      adj.get(A[i][0]).add(A[i][1]);
+      inDegree[A[i][1]]++;
     }
 
     // Queue for BFS
     Queue<Integer> queue = new LinkedList<>();
 
     // Add all nodes with in-degree 0
-    for (int i = 1; i <= N; i++) {
+    for (int i = 0; i < N; i++) {
       if (inDegree[i] == 0) {
         queue.offer(i);
       }
