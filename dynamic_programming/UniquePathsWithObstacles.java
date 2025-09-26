@@ -35,6 +35,13 @@ public class UniquePathsWithObstacles {
     }
   }
 
+  /**
+   * 1 = Obstacle
+   * 0 = Empty cell
+   * 
+   * @param A
+   * @return
+   */
   public static int uniquePathsWithObstacles(int[][] A) {
     int m = A.length;
     int n = A[0].length;

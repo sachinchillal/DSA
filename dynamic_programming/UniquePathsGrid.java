@@ -2,7 +2,7 @@ package dynamic_programming;
 
 import helper.TestCaseArray;
 
-public class UniquePaths {
+public class UniquePathsGrid {
   static TestCaseArray[] TestCases = {
       new TestCaseArray(1, 3, 1),
       new TestCaseArray(2, 1, 1),
@@ -48,7 +48,7 @@ public class UniquePaths {
         dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
       }
     }
-    // System.out.println(Arrays.deepToString(dp));
+    // Logger.log(dp);
     return dp[m - 1][n - 1];
   }
 

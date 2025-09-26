@@ -141,6 +141,12 @@ public class TestCaseArray {
     this.R_2Array = R_2Array;
   }
 
+  public TestCaseArray(int[] A, int[][] A_2Array, int R) {
+    this.A = A;
+    this.A_2Array = A_2Array;
+    this.R = R;
+  }
+
   public TestCaseArray(int[] A, int[][] A_2Array, int[] R_Array) {
     this.A = A;
     this.A_2Array = A_2Array;
